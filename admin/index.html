@@ -228,7 +228,8 @@
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking…';
     btn.disabled = true;
     setTimeout(()=>{
-      if(val === _p){
+      const currentPw = localStorage.getItem('stenmeds_admin_pw') || _p;
+      if(val === currentPw){
         sessionStorage.setItem('stenmeds_admin','1');
         window.location.href='dashboard.html';
       } else {

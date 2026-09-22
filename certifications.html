@@ -1,17 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Certifications — STENMED BIOTECH</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quality &amp; Certifications — STENMED BIOTECH</title>
+  <meta name="description" content="STENMED BIOTECH operates under strict WHO-GMP, ISO compliance, DCGI approvals, and state drug regulatory standards." />
+  <link rel="icon" href="/assets/images/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/css/style.css" />
-  <link rel="icon" href="assets/images/logo.png" type="image/png" />
+  <style>
+    .top-bar a i, .footer-links a i { font-size: 13px; }
+    .nav-link i.chevron { font-size: 11px; transition: transform var(--transition-fast, .2s); }
+    .nav-item:hover .nav-link i.chevron { transform: rotate(180deg); }
+    .social-icons a i { font-size: 15px; }
+    .footer-contact-item i { font-size: 14px; margin-top:3px; flex-shrink:0; color: var(--color-secondary); }
+    .cert-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-xl); transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+    .cert-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .cert-icon { width: 64px; height: 64px; border-radius: var(--radius-lg); background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: var(--spacing-md); }
+  </style>
 </head>
 <body>
-  <main style="padding:2rem;max-width:800px;margin:0 auto">
-    <h1>Certifications (Placeholder)</h1>
-    <p>List your certifications, licenses and accreditations here. This is a placeholder page.</p>
-    <p><a href="index.html">Back to home</a></p>
-  </main>
+
+<div class="top-bar" role="banner">
+  <div class="container">
+    <div class="top-bar-left">
+      <a href="tel:+917417350021" aria-label="Call us"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91 74173 50021</a>
+      <a href="mailto:Stenmedbiotech@gmail.com" aria-label="Email us"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Stenmedbiotech@gmail.com</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://wa.me/917417350021" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true" style="font-size: 1.25rem;"></i></a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header" id="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/index.html" class="site-logo" aria-label="STENMED BIOTECH Home">
+        <img src="/assets/images/logo.png" alt="STENMED BIOTECH Logo" class="logo-img">
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul class="nav-list" role="list">
+          <li class="nav-item"><a href="/index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="/about.html" class="nav-link">About</a></li>
+          <li class="nav-item">
+            <a href="/products.html" class="nav-link" aria-haspopup="true">Our Products<i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i></a>
+            <ul class="dropdown" role="list">
+              <li><a href="/products/pediatrics.html" class="dropdown-link"><i class="fa-solid fa-baby fa-fw" aria-hidden="true"></i> Pediatrics</a></li>
+              <li><a href="/products/gynecologist.html" class="dropdown-link"><i class="fa-solid fa-person-pregnant fa-fw" aria-hidden="true"></i> Gynecologist</a></li>
+              <li><a href="/products/gastro.html" class="dropdown-link"><i class="fa-solid fa-pills fa-fw" aria-hidden="true"></i> Gastro</a></li>
+              <li><a href="/products/physician.html" class="dropdown-link"><i class="fa-solid fa-user-doctor fa-fw" aria-hidden="true"></i> Physician</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a href="/products.html" class="dropdown-link dropdown-all"><i class="fa-solid fa-arrow-right fa-fw" aria-hidden="true"></i> All Products</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="/contact.html" class="nav-link">Contact</a></li>
+          <li class="nav-item"><a href="/contact.html" class="nav-link nav-cta">Get a Quote</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav-overlay" id="mobile-overlay" aria-hidden="true"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="mobile-nav-header">
+    <a href="/index.html" class="site-logo" style="gap:.5rem">
+      <img src="/assets/images/logo.png" alt="STENMED BIOTECH Logo" class="logo-img" style="height:36px;">
+    </a>
+    <button class="mobile-close-btn" id="mobile-close" aria-label="Close navigation menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+  </div>
+  <ul class="mobile-nav-list" role="list">
+    <li><a href="/index.html" class="mobile-nav-link">Home</a></li>
+    <li><a href="/about.html" class="mobile-nav-link">About</a></li>
+    <li><a href="/products.html" class="mobile-nav-link">Products</a></li>
+    <li><a href="/contact.html" class="mobile-nav-link">Contact</a></li>
+  </ul>
+  <div class="mobile-nav-cta"><a href="/contact.html" class="btn btn-accent" style="width:100%;justify-content:center">Get a Quote</a></div>
+</nav>
+
+<section class="page-banner">
+  <div class="container">
+    <h1 class="page-banner-title">Quality &amp; Certifications</h1>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a><span class="breadcrumb-sep">/</span>
+      <span aria-current="page">Certifications</span>
+    </nav>
+  </div>
+</section>
+
+<section class="section-pad bg-surface">
+  <div class="container">
+    <div class="section-header text-center" style="max-width:700px;margin:0 auto var(--spacing-3xl)">
+      <span class="section-label">Strict Regulatory Compliance</span>
+      <h2 class="section-title">Highest Standards in Pharmaceutical Quality</h2>
+      <p class="section-subtitle">Every medicine distributed by STENMED BIOTECH is certified by accredited statutory bodies and manufactured in state-of-the-art facilities.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--spacing-xl)">
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fa-solid fa-certificate"></i></div>
+        <h3 style="font-size:var(--font-size-lg);margin-bottom:var(--spacing-xs)">WHO-GMP Certified</h3>
+        <p style="color:var(--color-text-muted);font-size:var(--font-size-sm);line-height:1.6">All manufacturing partners follow strict World Health Organization Good Manufacturing Practices (WHO-GMP), ensuring consistency, sterility, and therapeutic efficacy.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon" style="background:rgba(22,163,74,.1);color:var(--color-success)"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3 style="font-size:var(--font-size-lg);margin-bottom:var(--spacing-xs)">Drug Controller Approval (DCGI)</h3>
+        <p style="color:var(--color-text-muted);font-size:var(--font-size-sm);line-height:1.6">Our pharmaceutical formulations and combinations comply fully with Drugs Controller General of India (DCGI) regulatory approvals and pharmacopoeial specifications (IP/BP/USP).</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon" style="background:rgba(168,85,247,.1);color:#a855f7"><i class="fa-solid fa-stamp"></i></div>
+        <h3 style="font-size:var(--font-size-lg);margin-bottom:var(--spacing-xs)">ISO 9001:2015 Quality Systems</h3>
+        <p style="color:var(--color-text-muted);font-size:var(--font-size-sm);line-height:1.6">Our warehousing, packaging, and cold-chain distribution workflows adhere strictly to ISO quality management certifications for temperature-controlled integrity.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon" style="background:rgba(245,158,11,.1);color:var(--color-warning)"><i class="fa-solid fa-file-shield"></i></div>
+        <h3 style="font-size:var(--font-size-lg);margin-bottom:var(--spacing-xs)">State Drug License &amp; GSTIN</h3>
+        <p style="color:var(--color-text-muted);font-size:var(--font-size-sm);line-height:1.6">Fully licensed distribution authority: Drug License No. <strong data-site="dlNumber">UP-GBN-2024-001</strong> and GSTIN <strong data-site="gstin">09AAACS1429B1Z0</strong> registered in Uttar Pradesh.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="/assets/images/logo.png" alt="STENMED BIOTECH Logo" class="logo-img" style="height:44px;background:#fff;padding:4px;border-radius:6px;"></div>
+        <p class="footer-desc">India's trusted pharmaceutical distributor supplying genuine WHO-certified medicines.</p>
+      </div>
+      <div>
+        <h3 class="footer-heading">Quick Links</h3>
+        <nav class="footer-links">
+          <a href="/index.html">Home</a>
+          <a href="/about.html">About</a>
+          <a href="/products.html">Products</a>
+          <a href="/certifications.html">Certifications</a>
+          <a href="/contact.html">Contact</a>
+        </nav>
+      </div>
+      <div>
+        <h3 class="footer-heading">Product Categories</h3>
+        <nav class="footer-links">
+          <a href="/products/pediatrics.html">Pediatrics</a>
+          <a href="/products/gynecologist.html">Gynecologist</a>
+          <a href="/products/gastro.html">Gastro</a>
+          <a href="/products/physician.html">Physician</a>
+        </nav>
+      </div>
+      <div>
+        <h3 class="footer-heading">Newsletter</h3>
+        <div class="newsletter-form">
+          <div class="newsletter-input-wrap">
+            <input type="email" class="newsletter-input" placeholder="Your email" aria-label="Email" />
+            <button class="btn btn-accent btn-sm newsletter-btn">Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span class="auto-year"></span> STENMED BIOTECH.</span>
+      <span>Designed with <i class="fa-solid fa-heart" style="color:#ef4444" aria-hidden="true"></i> for Healthcare</span>
+    </div>
+  </div>
+</footer>
+<button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/js/main.js"></script>
+<script src="/js/site-data-loader.js"></script>
 </body>
 </html>

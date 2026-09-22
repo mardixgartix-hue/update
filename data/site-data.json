@@ -1,0 +1,462 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "lastUpdated": "2026-09-23T01:30:00.000Z",
+  "company": {
+    "name": "STENMED BIOTECH",
+    "shortName": "STENMED",
+    "tagline": "Trusted Pharmaceutical Distribution",
+    "description": "STENMED BIOTECH is a leading pharmaceutical distributor supplying 100% genuine, WHO-certified medicines to hospitals, clinics, and healthcare providers across the region.",
+    "phone": "+91 74173 50021",
+    "phoneRaw": "+917417350021",
+    "whatsapp": "+91 74173 50021",
+    "whatsappNumber": "917417350021",
+    "email": "Stenmedbiotech@gmail.com",
+    "address": "KASNA GREATER NOIDA G.B NAGAR U.P PIN CODE 201310",
+    "city": "Greater Noida",
+    "state": "Uttar Pradesh",
+    "pincode": "201310",
+    "country": "India",
+    "workingHours": "Mon - Sat: 9:00 AM - 7:00 PM",
+    "gstin": "09AAACS1429B1Z0",
+    "dlNumber": "UP-GBN-2024-001",
+    "social": {
+      "whatsapp": "https://wa.me/917417350021",
+      "facebook": "https://facebook.com/stenmedbiotech",
+      "instagram": "https://instagram.com/stenmedbiotech",
+      "linkedin": "https://linkedin.com/company/stenmedbiotech"
+    }
+  },
+  "stats": [
+    {
+      "id": "stat-1",
+      "num": "50+",
+      "label": "Quality Formulations",
+      "icon": "fa-pills"
+    },
+    {
+      "id": "stat-2",
+      "num": "1,000+",
+      "label": "Prescribing Doctors",
+      "icon": "fa-user-doctor"
+    },
+    {
+      "id": "stat-3",
+      "num": "100%",
+      "label": "WHO-GMP Verified",
+      "icon": "fa-certificate"
+    },
+    {
+      "id": "stat-4",
+      "num": "24/7",
+      "label": "Supply & Distribution Support",
+      "icon": "fa-truck-fast"
+    }
+  ],
+  "heroSlides": [
+    {
+      "id": "hero-1",
+      "title": "Pioneering Healthcare Excellence",
+      "highlight": "Healthcare Excellence",
+      "subtitle": "Delivering premium pharmaceutical formulations across Pediatrics, Gynecology, Gastro, and General Medicine with unmatched clinical trust.",
+      "image": "/assets/images/hero/hero-01.jpg",
+      "primaryBtnText": "Explore Products",
+      "primaryBtnLink": "/products.html",
+      "secondaryBtnText": "Get a Quote",
+      "secondaryBtnLink": "/contact.html"
+    },
+    {
+      "id": "hero-2",
+      "title": "Uncompromising Quality & WHO-GMP Standards",
+      "highlight": "Quality & WHO-GMP",
+      "subtitle": "Every batch is rigorously tested and verified for therapeutic efficacy, safety, and strict regulatory compliance.",
+      "image": "/assets/images/hero/hero-02.jpg",
+      "primaryBtnText": "View Certifications",
+      "primaryBtnLink": "/certifications.html",
+      "secondaryBtnText": "Contact Us",
+      "secondaryBtnLink": "/contact.html"
+    },
+    {
+      "id": "hero-3",
+      "title": "Reliable Supply Chain & Nationwide Distribution",
+      "highlight": "Nationwide Distribution",
+      "subtitle": "Connecting top healthcare providers and pharmacies with temperature-controlled logistics and rapid fulfillment.",
+      "image": "/assets/images/hero/hero-03.jpg",
+      "primaryBtnText": "Partner With Us",
+      "primaryBtnLink": "/contact.html",
+      "secondaryBtnText": "Our About Story",
+      "secondaryBtnLink": "/about.html"
+    }
+  ],
+  "categories": [
+    {
+      "id": "pediatrics",
+      "name": "Pediatrics",
+      "slug": "pediatrics",
+      "desc": "Specialized formulations for infants and children.",
+      "icon": "fa-baby",
+      "color": "#ec4899",
+      "badge": "badge-pink",
+      "page": "/products/pediatrics.html"
+    },
+    {
+      "id": "gynecologist",
+      "name": "Gynecologist",
+      "slug": "gynecologist",
+      "desc": "Complete women's health products and specialized therapeutics.",
+      "icon": "fa-person-pregnant",
+      "color": "#a855f7",
+      "badge": "badge-purple",
+      "page": "/products/gynecologist.html"
+    },
+    {
+      "id": "gastro",
+      "name": "Gastro",
+      "slug": "gastro",
+      "desc": "Digestive health, antacids, and liver care syrups.",
+      "icon": "fa-pills",
+      "color": "#0d9488",
+      "badge": "badge-teal",
+      "page": "/products/gastro.html"
+    },
+    {
+      "id": "physician",
+      "name": "Physician",
+      "slug": "physician",
+      "desc": "General physician prescriptions and daily essential wellness.",
+      "icon": "fa-user-doctor",
+      "color": "#0284c7",
+      "badge": "badge-blue",
+      "page": "/products/physician.html"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod-stencuf",
+      "name": "Stencuf",
+      "category": "pediatrics",
+      "composition": "Levosalbutamol, Ambroxol & Guaiphenesin Syrup",
+      "use": "Cough and cold relief",
+      "form": "Syrup",
+      "packaging": "100ml Pet Bottle with Measuring Cup",
+      "mrp": "115.00",
+      "description": "Triple-action pediatric bronchodilator, mucolytic, and expectorant syrup for chest congestion, asthma, and productive cough.",
+      "image": "/assets/images/products/stencuf.jpg",
+      "featured": true,
+      "inStock": true
+    },
+    {
+      "id": "prod-mefenik",
+      "name": "Mefenik",
+      "category": "pediatrics",
+      "composition": "Paracetamol & Mefenamic Acid Suspension",
+      "use": "Pain and fever relief",
+      "form": "Suspension",
+      "packaging": "60ml Bottle",
+      "mrp": "78.00",
+      "description": "Potent antipyretic and anti-inflammatory suspension formulated for fast reduction of high fever and associated pediatric pain.",
+      "image": "/assets/images/products/mefenik.jpg",
+      "featured": true,
+      "inStock": true
+    },
+    {
+      "id": "prod-stengut",
+      "name": "Stengut",
+      "category": "pediatrics",
+      "composition": "Prebiotic, Probiotics, Zinc Gluconate & LB Suspension",
+      "use": "Gastrointestinal support",
+      "form": "Suspension",
+      "packaging": "60ml Bottle",
+      "mrp": "145.00",
+      "description": "Comprehensive gut flora restoration formula combining probiotic spores with zinc to treat acute pediatric diarrhea and dysbiosis.",
+      "image": "/assets/images/products/stengut.jpg",
+      "featured": false,
+      "inStock": true
+    },
+    {
+      "id": "prod-hepto-b6-ped",
+      "name": "Hepto B6",
+      "category": "pediatrics",
+      "composition": "Silymarin, L-Ornithine L-Aspartate, Folic Acid, Co-Enzyme Q10 Syrup",
+      "use": "Hepatoprotective liver tonic",
+      "form": "Syrup",
+      "packaging": "200ml Bottle",
+      "mrp": "220.00",
+      "description": "Advanced liver rejuvenating syrup supporting hepatic cell regeneration and detoxification in pediatric cases.",
+      "image": "/assets/images/products/hepto-b6.jpg",
+      "featured": false,
+      "inStock": true
+    },
+    {
+      "id": "prod-bacinik",
+      "name": "Bacinik",
+      "category": "pediatrics",
+      "composition": "Bacillus Clausii Spores Suspension (2 Billion CFU)",
+      "use": "Probiotic oral suspension",
+      "form": "Suspension",
+      "packaging": "10 x 5ml Mini Bottles",
+      "mrp": "450.00",
+      "description": "Spore-forming polyantibiotic-resistant probiotic oral suspension to restore intestinal microbiome during and after antibiotic therapy.",
+      "image": "/assets/images/products/bacinik.jpg",
+      "featured": true,
+      "inStock": true
+    },
+    {
+      "id": "prod-rezenik",
+      "name": "Rezenik Syrup and Drop",
+      "category": "pediatrics",
+      "composition": "Levocetirizine Dihydrochloride & Montelukast Syrup / Drops",
+      "use": "Anti-allergic / Nutritional",
+      "form": "Drops",
+      "packaging": "30ml / 60ml",
+      "mrp": "95.00",
+      "description": "Dual action anti-histaminic and leukotriene receptor antagonist for allergic rhinitis, seasonal allergies, and bronchial spasm.",
+      "image": "",
+      "featured": false,
+      "inStock": true
+    },
+    {
+      "id": "prod-sten-phase-500",
+      "name": "Sten Phase 500 Inj",
+      "category": "gynecologist",
+      "composition": "Hydroxyprogesterone Caproate Injection I.P. 500mg/2ml",
+      "use": "Hormonal injection for women's health",
+      "form": "Injection",
+      "packaging": "2ml Ampoule with Syringe",
+      "mrp": "320.00",
+      "description": "Sustained progestational action injection to prevent recurrent miscarriage and reduce the risk of preterm delivery in pregnant women.",
+      "image": "/assets/images/products/sten-phase-500.jpg",
+      "featured": true,
+      "inStock": true
+    },
+    {
+      "id": "prod-falroz-xt",
+      "name": "Falroz-XT",
+      "category": "gynecologist",
+      "composition": "Ferrous Ascorbate, Folic Acid & Zinc Tablets",
+      "use": "Iron deficiency anemia",
+      "form": "Tablet",
+      "packaging": "10 x 10 Alu-Alu Blister",
+      "mrp": "165.00",
+      "description": "High absorption iron therapy enriched with active folate and zinc for rapid hemoglobin rise during pregnancy and lactation.",
+      "image": "/assets/images/products/falroz-xt.jpg",
+      "featured": true,
+      "inStock": true
+    },
+    {
+      "id": "prod-sten-dsr-gyn",
+      "name": "Sten DSR",
+      "category": "gynecologist",
+      "composition": "Pantoprazole Sodium 40mg & Domperidone 30mg SR Capsules",
+      "use": "Acid reflux & morning sickness",
+      "form": "Capsule",
+      "packaging": "10 x 10 Strip",
+      "mrp": "140.00",
+      "description": "Dual proton pump inhibitor and prokinetic capsule providing round-the-clock acid suppression and relief from pregnancy morning nausea.",
+      "image": "/assets/images/products/sten-dsr.jpg",
+      "featured": false,
+      "inStock": true
+    },
+    {
+      "id": "prod-calsical-lc-gyn",
+      "name": "Calsical LC",
+      "category": "gynecologist",
+      "composition": "Calcium Citrate, L-Carnitine, Vitamin E, Zinc Sulphate & Folic Acid Tablets",
+      "use": "Bone health & nutrition",
+      "form": "Tablet",
+      "packaging": "10 x 15 Tablets",
+      "mrp": "210.00",
+      "description": "Bioavailable calcium complex for maternal bone mineralization, muscular stamina, and prenatal nutrient fortification.",
+      "image": "/assets/images/products/calsical-lc.jpg",
+      "featured": false,
+      "inStock": true
+    },
+    {
+      "id": "prod-my-protine-gyn",
+      "name": "My Protine Protein Powder",
+      "category": "gynecologist",
+      "composition": "Protein Powder with DHA, Bovine Colostrum, Multivitamins (Sugar Free)",
+      "use": "Maternal health and vitality",
+      "form": "Powder",
+      "packaging": "200g Food-Grade Jar",
+      "mrp": "380.00",
+      "description": "Premium maternal nutritional supplement rich in docosahexaenoic acid (DHA) for foetal brain development and mother's strength.",
+      "image": "/assets/images/products/my-protine.jpg",
+      "featured": true,
+      "inStock": true
+    },
+    {
+      "id": "prod-stenzi-pro-gyn",
+      "name": "Stenzi Pro Energy Drink",
+      "category": "gynecologist",
+      "composition": "Dextrose, Sucrose, Vitamin C, D3, Zinc & Electrolyte Powder",
+      "use": "Energy & electrolyte replacement",
+      "form": "Powder",
+      "packaging": "105g Sachet",
+      "mrp": "65.00",
+      "description": "Instant rehydration and metabolic energizer replenishing vital ions lost during exertion, hot weather, or convalescence.",
+      "image": "/assets/images/products/stenzi-pro.jpg",
+      "featured": false,
+      "inStock": true
+    },
+    {
+      "id": "prod-hepto-b6-gastro",
+      "name": "Hepto B6 Syp",
+      "category": "gastro",
+      "composition": "Silymarin, L-Ornithine L-Aspartate, Folic Acid, Co-Enzyme Q10 Syrup",
+      "use": "Hepatoprotective liver tonic",
+      "form": "Syrup",
+      "packaging": "200ml Bottle",
+      "mrp": "220.00",
+      "description": "Clinically proven hepatic protection against drug-induced hepatotoxicity, alcoholic liver disease, and sluggish liver metabolism.",
+      "image": "/assets/images/products/hepto-b6.jpg",
+      "featured": true,
+      "inStock": true
+    },
+    {
+      "id": "prod-stenliv-ds",
+      "name": "Stenliv DS Syp",
+      "category": "gastro",
+      "composition": "Double-Strength Ayurvedic/Herbal & Phytochemical Liver Syrup",
+      "use": "Fatty liver, liver disorder, improve digestion",
+      "form": "Syrup",
+      "packaging": "200ml Pet Bottle",
+      "mrp": "180.00",
+      "description": "Extra-strength herbal liver tonic designed to detoxify hepatic cells, reduce fatty liver grade, and boost appetite and bile secretion.",
+      "image": "/assets/images/products/stenliv-ds.jpg",
+      "featured": true,
+      "inStock": true
+    },
+    {
+      "id": "prod-sten-dsr-gastro",
+      "name": "Sten DSR",
+      "category": "gastro",
+      "composition": "Pantoprazole Sodium 40mg & Domperidone 30mg Sustained Release",
+      "use": "GERD and acidity",
+      "form": "Capsule",
+      "packaging": "10 x 10 Capsules",
+      "mrp": "140.00",
+      "description": "Immediate and long-lasting relief from severe gastroesophageal reflux disease, heartburn, and peptic ulcer disorders.",
+      "image": "/assets/images/products/sten-dsr.jpg",
+      "featured": false,
+      "inStock": true
+    },
+    {
+      "id": "prod-gasomed",
+      "name": "Gasomed Syp",
+      "category": "gastro",
+      "composition": "Magaldrate 480mg + Simethicone 20mg Antacid Suspension",
+      "use": "Quick relief from acidity & gas",
+      "form": "Suspension",
+      "packaging": "170ml Bottle",
+      "mrp": "92.00",
+      "description": "Fast-acting neutralizing antacid suspension with anti-flatulent action for instant relief from burning sensation, bloating, and gas.",
+      "image": "/assets/images/products/gasomed.jpg",
+      "featured": true,
+      "inStock": true
+    },
+    {
+      "id": "prod-doxofer-dx",
+      "name": "DOXOFER-DX",
+      "category": "physician",
+      "composition": "Doxofylline 400mg & Ambroxol HCl 30mg Tablets",
+      "use": "Asthma and bronchitis",
+      "form": "Tablet",
+      "packaging": "10 x 10 Strip",
+      "mrp": "175.00",
+      "description": "New-generation xanthine derivative bronchodilator with superior safety profile and mucus clearing efficiency for COPD and asthma.",
+      "image": "",
+      "featured": true,
+      "inStock": true
+    },
+    {
+      "id": "prod-calsical-lc-phys",
+      "name": "Calsical LC",
+      "category": "physician",
+      "composition": "Calcium Citrate, L-Carnitine, Vitamin E, Zinc Sulphate & Folic Acid Tablets",
+      "use": "Calcium supplementation & muscle energy",
+      "form": "Tablet",
+      "packaging": "10 x 15 Tablets",
+      "mrp": "210.00",
+      "description": "Comprehensive bone mineral density supplement aiding neuromuscular conduction, joint flexibility, and age-related osteopenia.",
+      "image": "/assets/images/products/calsical-lc.jpg",
+      "featured": false,
+      "inStock": true
+    },
+    {
+      "id": "prod-stenzi-pro-phys",
+      "name": "Stenzi Pro",
+      "category": "physician",
+      "composition": "Dextrose, Sucrose, Vitamin C, D3, Zinc & Electrolyte Powder",
+      "use": "Instant energy & electrolytes",
+      "form": "Powder",
+      "packaging": "105g Sachet",
+      "mrp": "65.00",
+      "description": "Refreshing orange flavored electrolyte recharge formula offering immediate rehydration and fatigue relief.",
+      "image": "/assets/images/products/stenzi-pro.jpg",
+      "featured": false,
+      "inStock": true
+    },
+    {
+      "id": "prod-my-protine-phys",
+      "name": "My Protine Protein Powder",
+      "category": "physician",
+      "composition": "High Protein Powder with DHA, Vitamins & Minerals (Sugar Free)",
+      "use": "General wellness & recovery",
+      "form": "Powder",
+      "packaging": "200g Jar",
+      "mrp": "380.00",
+      "description": "Wholesome dietary protein powder fortifying immunity, muscle tone, and recovery in post-illness and convalescent patients.",
+      "image": "/assets/images/products/my-protine.jpg",
+      "featured": false,
+      "inStock": true
+    }
+  ],
+  "whyChooseUs": [
+    {
+      "icon": "fa-award",
+      "title": "WHO-GMP Verified Formulations",
+      "desc": "Manufactured in state-of-the-art facilities compliant with strict Good Manufacturing Practices and DCGI norms."
+    },
+    {
+      "icon": "fa-truck-fast",
+      "title": "Reliable & Swift Distribution",
+      "desc": "Extensive logistical reach ensuring rapid supply fulfillment to hospitals, retailers, and distributors."
+    },
+    {
+      "icon": "fa-temperature-low",
+      "title": "Temperature Controlled Logistics",
+      "desc": "Cold-chain integrity preserved end-to-end to protect stability, purity, and therapeutic potency."
+    },
+    {
+      "icon": "fa-hand-holding-dollar",
+      "title": "Competitive Ethical Pricing",
+      "desc": "Providing superior quality medications at transparent, accessible, and highly competitive pricing tiers."
+    }
+  ],
+  "about": {
+    "headline": "Committed to Clinical Excellence & Healthcare Trust",
+    "subheadline": "STENMED BIOTECH operates at the forefront of pharmaceutical distribution and marketing.",
+    "story": "Founded with a vision to deliver world-class therapeutic solutions, STENMED BIOTECH bridges clinical excellence and ethical healthcare distribution. Headquartered in Greater Noida, UP, we supply a wide spectrum of certified pharmaceuticals across Pediatric, Gynecological, Gastrointestinal, and Physician specialties.",
+    "mission": "To enhance human health and well-being by ensuring uninterrupted access to safe, genuine, and high-quality pharmaceutical formulations.",
+    "vision": "To be recognized as the most trusted healthcare distribution brand nationwide, known for integrity, rapid supply chain, and clinical excellence."
+  },
+  "faqs": [
+    {
+      "q": "How can I place an institutional or bulk order with STENMED BIOTECH?",
+      "a": "You can connect directly with our sales team via WhatsApp (+91 74173 50021), call our helpline, or submit an inquiry on our Contact page with your drug license and requirement list."
+    },
+    {
+      "q": "Are all products manufactured under WHO-GMP compliance?",
+      "a": "Yes, 100% of our product portfolio is produced in certified WHO-GMP and ISO compliant pharmaceutical manufacturing plants with batch-level quality control testing."
+    },
+    {
+      "q": "What therapeutic categories does STENMED BIOTECH cover?",
+      "a": "Our core divisions specialize in Pediatrics, Gynecologist/Women's Health, Gastroenterology, Hepatology (Liver Care), Pulmonology, and General Physician medicines."
+    },
+    {
+      "q": "What is the expected dispatch and delivery turnaround time?",
+      "a": "Stock orders are typically processed and dispatched within 24 to 48 hours with real-time consignment tracking."
+    }
+  ]
+}

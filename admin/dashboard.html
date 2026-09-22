@@ -3,219 +3,212 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Dashboard — STENMED BIOTECH Admin</title>
+  <title>Admin Dashboard — STENMED BIOTECH</title>
   <meta name="robots" content="noindex,nofollow"/>
+  <link rel="icon" href="/assets/images/logo.png" type="image/png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --primary:#1a56db;--primary-dark:#1143b0;--accent:#0ea5e9;
-      --success:#16a34a;--danger:#dc2626;--warning:#f59e0b;
-      --bg:#0f172a;--surface:#1e293b;--surface2:#293548;--surface3:#334155;
-      --border:#334155;--text:#f1f5f9;--text-muted:#94a3b8;
-      --radius:12px;--sidebar-w:260px;
+      --success:#16a34a;--danger:#dc2626;--warning:#f59e0b;--purple:#9333ea;
+      --bg:#0b1120;--surface:#151f32;--surface2:#1e293b;--surface3:#334155;
+      --border:#26354a;--text:#f8fafc;--text-muted:#94a3b8;
+      --radius:12px;--sidebar-w:270px;
     }
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;overflow-x:hidden}
 
     /* ── SIDEBAR ── */
     .sidebar{
       width:var(--sidebar-w);min-height:100vh;background:var(--surface);
       border-right:1px solid var(--border);display:flex;flex-direction:column;
-      position:fixed;left:0;top:0;bottom:0;z-index:100;transition:transform .3s;
+      position:fixed;left:0;top:0;bottom:0;z-index:100;transition:transform .3s cubic-bezier(.4,0,.2,1);
     }
-    .sidebar-brand{padding:1.3rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.7rem}
-    .sidebar-brand img{height:36px;background:#fff;padding:4px 8px;border-radius:7px}
-    .sidebar-brand span{font-size:.7rem;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase}
-    .sidebar-nav{flex:1;padding:1rem 0}
+    .sidebar-brand{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+    .sidebar-brand img{height:36px;background:#fff;padding:4px 8px;border-radius:8px;object-fit:contain}
+    .sidebar-brand div{display:flex;flex-direction:column}
+    .sidebar-brand strong{font-size:.9rem;font-weight:700;letter-spacing:.02em;color:#fff}
+    .sidebar-brand span{font-size:.68rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+    
+    .sidebar-nav{flex:1;padding:.8rem 0;overflow-y:auto}
+    .nav-group-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);padding:.8rem 1.4rem .3rem;font-weight:700}
     .sidebar-link{
-      display:flex;align-items:center;gap:.7rem;padding:.7rem 1.2rem;
-      color:var(--text-muted);text-decoration:none;font-size:.85rem;font-weight:500;
-      border-left:3px solid transparent;transition:all .15s;cursor:pointer;
+      display:flex;align-items:center;gap:.75rem;padding:.65rem 1.4rem;
+      color:var(--text-muted);text-decoration:none;font-size:.84rem;font-weight:500;
+      border-left:3px solid transparent;transition:all .15s ease;cursor:pointer;
     }
-    .sidebar-link:hover,.sidebar-link.active{color:var(--text);background:var(--surface2);border-left-color:var(--accent)}
-    .sidebar-link i{width:20px;text-align:center;font-size:.9rem}
-    .sidebar-footer{padding:1rem 1.2rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--text-muted)}
-    .sidebar-divider{height:1px;background:var(--border);margin:.5rem 1.2rem}
+    .sidebar-link:hover{color:var(--text);background:rgba(255,255,255,.03);border-left-color:var(--border)}
+    .sidebar-link.active{color:#fff;background:rgba(14,165,233,.08);border-left-color:var(--accent);font-weight:600}
+    .sidebar-link i{width:18px;text-align:center;font-size:.9rem}
+    .sidebar-link .badge-count{margin-left:auto;font-size:.68rem;background:var(--surface3);padding:.15rem .45rem;border-radius:10px;color:var(--text)}
+    
+    .sidebar-footer{padding:1rem 1.4rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:.5rem}
+    .github-badge{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--text-muted);background:var(--surface2);padding:.5rem .75rem;border-radius:8px;border:1px solid var(--border)}
+    .github-badge i{font-size:1rem;color:#fff}
 
     /* ── MAIN ── */
-    .main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh}
+    .main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh;max-width:calc(100vw - var(--sidebar-w))}
     .topbar{
       display:flex;align-items:center;justify-content:space-between;
-      padding:.9rem 2rem;background:var(--surface);border-bottom:1px solid var(--border);
-      position:sticky;top:0;z-index:50;
+      padding:.85rem 2rem;background:rgba(21,31,50,.85);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;
     }
-    .topbar-title{font-size:1.1rem;font-weight:700;display:flex;align-items:center;gap:.6rem}
+    .topbar-title{font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:.6rem}
     .topbar-title i{color:var(--accent);font-size:1rem}
-    .topbar-actions{display:flex;align-items:center;gap:.7rem}
-    .topbar-user{font-size:.8rem;color:var(--text-muted)}
-    .content{flex:1;padding:2rem}
+    .topbar-actions{display:flex;align-items:center;gap:.8rem}
+    .btn-sync-quick{
+      background:linear-gradient(135deg,#0284c7,#2563eb);color:#fff;
+      font-size:.8rem;font-weight:600;padding:.5rem 1rem;border-radius:8px;border:none;cursor:pointer;
+      display:flex;align-items:center;gap:.5rem;transition:all .2s;
+    }
+    .btn-sync-quick:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(2,132,199,.4)}
+    .content{flex:1;padding:1.8rem 2rem}
 
-    /* ── STAT CARDS ── */
-    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+    /* ── STATS CARDS ── */
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin-bottom:1.8rem}
     .stat-card{
       background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-      padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem;
+      padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1.1rem;transition:transform .2s,border-color .2s;
     }
+    .stat-card:hover{transform:translateY(-2px);border-color:var(--surface3)}
     .stat-icon{
-      width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;
-      font-size:1.1rem;flex-shrink:0;
+      width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      font-size:1.2rem;flex-shrink:0;
     }
-    .stat-num{font-size:1.5rem;font-weight:800;line-height:1}
-    .stat-label{font-size:.75rem;color:var(--text-muted);margin-top:.15rem}
+    .stat-num{font-size:1.6rem;font-weight:800;line-height:1;letter-spacing:-.02em}
+    .stat-label{font-size:.75rem;color:var(--text-muted);margin-top:.25rem}
 
-    /* ── PANEL ── */
+    /* ── PANELS ── */
     .panel{
       background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-      margin-bottom:1.5rem;overflow:hidden;
+      margin-bottom:1.8rem;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.25);
     }
     .panel-header{
-      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;
-      padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;
+      padding:1.1rem 1.6rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,.01);
     }
-    .panel-title{font-size:1rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
-    .panel-title i{color:var(--accent);font-size:.9rem}
-    .panel-body{padding:1.5rem}
+    .panel-title{font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:.55rem}
+    .panel-title i{color:var(--accent);font-size:.95rem}
+    .panel-desc{font-size:.78rem;color:var(--text-muted);margin-top:.2rem}
+    .panel-body{padding:1.6rem}
 
-    /* ── FORM ── */
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    /* ── FORMS & INPUTS ── */
+    .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    .form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem}
     .form-group{margin-bottom:1.1rem}
     .form-group.full{grid-column:1/-1}
-    label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);margin-bottom:.35rem;letter-spacing:.03em}
-    input[type=text],input[type=number],input[type=password],select,textarea{
+    label{display:block;font-size:.76rem;font-weight:600;color:var(--text-muted);margin-bottom:.4rem;letter-spacing:.03em;text-transform:uppercase}
+    input[type=text],input[type=number],input[type=password],input[type=email],input[type=url],select,textarea{
       width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;
       color:var(--text);font-size:.88rem;font-family:inherit;padding:.65rem .9rem;outline:none;
       transition:border-color .2s,box-shadow .2s;
     }
-    input:focus,select:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,86,219,.18)}
-    select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2394a3b8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-    textarea{resize:vertical;min-height:90px}
-    select option{background:var(--surface);color:var(--text)}
-
-    /* ── IMAGE UPLOAD ── */
-    .upload-area{
-      border:2px dashed var(--border);border-radius:10px;padding:2rem;
-      text-align:center;cursor:pointer;transition:all .2s;position:relative;
-    }
-    .upload-area:hover{border-color:var(--accent);background:rgba(14,165,233,.04)}
-    .upload-area.has-image{border-color:var(--success);background:rgba(22,163,74,.05)}
-    .upload-area i.upload-main-icon{font-size:2rem;color:var(--text-muted);margin-bottom:.6rem}
-    .upload-area p{font-size:.82rem;color:var(--text-muted)}
-    .upload-area p strong{color:var(--accent)}
-    .upload-input{position:absolute;inset:0;opacity:0;cursor:pointer}
-    .upload-preview{max-height:120px;max-width:100%;border-radius:8px;margin-top:.6rem;display:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(14,165,233,.18)}
+    select{cursor:pointer}
+    textarea{resize:vertical;min-height:90px;font-family:inherit}
+    .input-hint{font-size:.72rem;color:var(--text-muted);margin-top:.35rem;display:flex;align-items:center;gap:.35rem}
 
     /* ── BUTTONS ── */
     .btn{
       padding:.65rem 1.3rem;border:none;border-radius:8px;font-family:inherit;
       font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;
-      display:inline-flex;align-items:center;gap:.45rem;
+      display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
     }
     .btn-primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff}
-    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(26,86,219,.35)}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(26,86,219,.35)}
     .btn-success{background:var(--success);color:#fff}
     .btn-success:hover{background:#15803d}
-    .btn-danger{background:var(--danger);color:#fff;font-size:.78rem;padding:.45rem .8rem}
+    .btn-danger{background:var(--danger);color:#fff}
     .btn-danger:hover{background:#b91c1c}
     .btn-ghost{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)}
     .btn-ghost:hover{color:var(--text);border-color:var(--accent)}
-    .btn-warning{background:var(--warning);color:#1e293b}
-    .btn-warning:hover{background:#d97706}
-    .btn-sm{font-size:.78rem;padding:.45rem .9rem}
-    .btn-lg{font-size:.95rem;padding:.8rem 2rem}
+    .btn-github{background:#24292e;color:#fff;border:1px solid #444d56}
+    .btn-github:hover{background:#2f363d;border-color:#586069}
+    .btn-sm{font-size:.78rem;padding:.45rem .85rem}
+    .btn-lg{font-size:.95rem;padding:.8rem 1.8rem}
 
-    /* ── TABLE ── */
+    /* ── CODE / JSON EDITOR ── */
+    .json-editor-container{
+      border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#0d1117;
+    }
+    .json-editor-toolbar{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.6rem 1rem;background:#161b22;border-bottom:1px solid #30363d;
+    }
+    .json-textarea{
+      width:100%;height:450px;background:#0d1117;color:#c9d1d9;border:none;
+      font-family:'JetBrains Mono',monospace;font-size:.84rem;line-height:1.5;
+      padding:1rem;outline:none;resize:vertical;white-space:pre;tab-size:2;
+    }
+
+    /* ── TABLES ── */
     .products-table{width:100%;border-collapse:collapse}
     .products-table th{
       text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;
-      color:var(--text-muted);font-weight:600;padding:.7rem 1rem;
-      border-bottom:1px solid var(--border);
+      color:var(--text-muted);font-weight:600;padding:.75rem 1rem;border-bottom:1px solid var(--border);
     }
     .products-table td{
-      padding:.7rem 1rem;border-bottom:1px solid var(--border);font-size:.85rem;vertical-align:middle;
+      padding:.75rem 1rem;border-bottom:1px solid var(--border);font-size:.85rem;vertical-align:middle;
     }
-    .products-table tr:last-child td{border-bottom:none}
-    .products-table tr:hover td{background:var(--surface2)}
-    .product-thumb{width:44px;height:44px;border-radius:8px;object-fit:cover;background:var(--surface2);display:block}
+    .products-table tr:hover td{background:rgba(255,255,255,.02)}
+    .product-thumb{width:42px;height:42px;border-radius:8px;object-fit:contain;background:#fff;padding:2px;border:1px solid var(--border)}
     .product-thumb-placeholder{
-      width:44px;height:44px;border-radius:8px;background:var(--surface2);
-      display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.9rem;
+      width:42px;height:42px;border-radius:8px;background:var(--surface2);
+      display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.85rem;
     }
-    .badge{display:inline-block;padding:.2rem .55rem;border-radius:5px;font-size:.7rem;font-weight:600}
-    .badge-blue{background:rgba(14,165,233,.15);color:#7dd3fc}
-    .badge-green{background:rgba(22,163,74,.15);color:#86efac}
-    .badge-purple{background:rgba(168,85,247,.15);color:#d8b4fe}
-    .badge-amber{background:rgba(245,158,11,.15);color:#fcd34d}
-    .badge-pink{background:rgba(236,72,153,.15);color:#f9a8d4}
-    .badge-red{background:rgba(220,38,38,.15);color:#fca5a5}
-    .badge-teal{background:rgba(13,148,136,.15);color:#5eead4}
-    .badge-default{background:rgba(148,163,184,.15);color:#94a3b8}
-    .badge-source{font-size:.65rem;padding:.15rem .4rem;margin-left:.3rem}
-    .empty-state{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
-    .empty-state i{font-size:2.5rem;margin-bottom:.7rem;display:block;opacity:.5}
-    .empty-state p{font-size:.9rem}
+    .badge{display:inline-block;padding:.2rem .55rem;border-radius:6px;font-size:.7rem;font-weight:600}
+    .badge-pink{background:rgba(236,72,153,.15);color:#f472b6}
+    .badge-purple{background:rgba(168,85,247,.15);color:#c084fc}
+    .badge-teal{background:rgba(13,148,136,.15);color:#2dd4bf}
+    .badge-blue{background:rgba(14,165,233,.15);color:#38bdf8}
 
     /* ── TOAST ── */
     .toast{
-      position:fixed;bottom:2rem;right:2rem;background:var(--success);color:#fff;
-      padding:.8rem 1.4rem;border-radius:10px;font-size:.85rem;font-weight:600;
-      display:flex;align-items:center;gap:.5rem;
-      transform:translateY(100px);opacity:0;transition:all .35s;z-index:200;
-      box-shadow:0 10px 30px rgba(0,0,0,.4);
+      position:fixed;bottom:2rem;right:2rem;background:var(--surface2);color:#fff;
+      border:1px solid var(--border);padding:.85rem 1.4rem;border-radius:10px;font-size:.85rem;
+      font-weight:600;display:flex;align-items:center;gap:.6rem;transform:translateY(100px);
+      opacity:0;transition:all .3s cubic-bezier(.4,0,.2,1);z-index:200;box-shadow:0 15px 40px rgba(0,0,0,.5);
     }
     .toast.show{transform:translateY(0);opacity:1}
-    .toast.error{background:var(--danger)}
+    .toast.success{border-color:var(--success);background:#064e3b}
+    .toast.error{border-color:var(--danger);background:#7f1d1d}
 
-    /* ── RESPONSIVE ── */
-    .hamburger-admin{display:none;background:none;border:none;color:var(--text);font-size:1.3rem;cursor:pointer;padding:4px}
-    @media(max-width:768px){
-      .sidebar{transform:translateX(-100%)}
-      .sidebar.open{transform:translateX(0)}
-      .main{margin-left:0}
-      .hamburger-admin{display:block}
-      .form-row{grid-template-columns:1fr}
-      .stats{grid-template-columns:1fr 1fr}
-      .content{padding:1.2rem}
+    /* ── GITHUB SYNC BOX ── */
+    .sync-card{
+      background:linear-gradient(135deg,#131f37,#0f172a);border:1px solid rgba(14,165,233,.25);
+      border-radius:var(--radius);padding:1.6rem;margin-bottom:1.5rem;
     }
-    @media(max-width:480px){
-      .stats{grid-template-columns:1fr}
-    }
+    .sync-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1.2rem 0}
+    .sync-step{background:var(--surface2);padding:1rem;border-radius:10px;border:1px solid var(--border)}
+    .sync-step strong{display:block;font-size:.85rem;margin-bottom:.3rem;color:var(--accent)}
+    .sync-step p{font-size:.78rem;color:var(--text-muted);line-height:1.4}
 
-    /* ── MODAL ── */
+    /* ── MODALS ── */
     .modal-overlay{
-      position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:150;
-      display:none;align-items:center;justify-content:center;padding:1rem;
+      position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
+      z-index:150;display:none;align-items:center;justify-content:center;padding:1rem;
     }
     .modal-overlay.show{display:flex}
     .modal{
       background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-      max-width:420px;width:100%;padding:1.8rem;box-shadow:0 20px 50px rgba(0,0,0,.5);
+      max-width:560px;width:100%;padding:1.8rem;box-shadow:0 25px 60px rgba(0,0,0,.6);max-height:90vh;overflow-y:auto;
     }
-    .modal h3{font-size:1rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
-    .modal h3 i{color:var(--warning)}
-    .modal p{font-size:.85rem;color:var(--text-muted);margin-bottom:1.2rem}
-    .modal-actions{display:flex;gap:.6rem;justify-content:flex-end}
+    .modal h3{font-size:1.1rem;margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
+    .modal-actions{display:flex;gap:.7rem;justify-content:flex-end;margin-top:1.5rem}
 
-    /* ── SETTINGS ── */
-    .settings-card{
-      background:var(--surface2);border:1px solid var(--border);border-radius:10px;
-      padding:1.5rem;margin-bottom:1rem;
+    /* ── RESPONSIVE ── */
+    .hamburger-admin{display:none;background:none;border:none;color:var(--text);font-size:1.3rem;cursor:pointer;padding:4px}
+    @media(max-width:900px){
+      .sidebar{transform:translateX(-100%)}
+      .sidebar.open{transform:translateX(0)}
+      .main{margin-left:0;max-width:100vw}
+      .hamburger-admin{display:block}
+      .form-grid-2,.form-grid-3{grid-template-columns:1fr}
+      .content{padding:1.2rem}
     }
-    .settings-card h4{font-size:.9rem;font-weight:700;margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem}
-    .settings-card h4 i{color:var(--accent);font-size:.85rem}
-    .settings-card .desc{font-size:.78rem;color:var(--text-muted);margin-bottom:1rem}
-    .pw-field-wrap{position:relative}
-    .pw-field-wrap input{padding-right:2.5rem}
-    .pw-toggle{
-      position:absolute;right:10px;top:50%;transform:translateY(-50%);
-      background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.85rem;padding:4px
-    }
-    .pw-toggle:hover{color:var(--text)}
-    .pw-msg{font-size:.78rem;margin-top:.5rem;display:none}
-    .pw-msg.show{display:block}
-    .pw-msg.success{color:#86efac}
-    .pw-msg.error{color:#fca5a5}
   </style>
 </head>
 <body>
@@ -223,235 +216,421 @@
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-brand">
-    <img src="/assets/images/logo.png" alt="Logo"/>
-    <span>Admin Panel</span>
+    <img src="/assets/images/logo.png" alt="STENMED"/>
+    <div>
+      <strong>STENMED BIOTECH</strong>
+      <span>Admin Control Hub</span>
+    </div>
   </div>
   <nav class="sidebar-nav">
+    <div class="nav-group-label">Overview</div>
     <a class="sidebar-link active" data-view="dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
-    <a class="sidebar-link" data-view="add-product"><i class="fa-solid fa-plus-circle"></i> Add New Product</a>
-    <a class="sidebar-link" data-view="manage-products"><i class="fa-solid fa-boxes-stacked"></i> All Products</a>
-    <div class="sidebar-divider"></div>
-    <a class="sidebar-link" data-view="settings"><i class="fa-solid fa-gear"></i> Settings</a>
-    <a class="sidebar-link" href="/index.html" target="_blank"><i class="fa-solid fa-globe"></i> View Website</a>
+
+    <div class="nav-group-label">Website Content</div>
+    <a class="sidebar-link" data-view="company"><i class="fa-solid fa-building"></i> Company &amp; Contact</a>
+    <a class="sidebar-link" data-view="products"><i class="fa-solid fa-pills"></i> Product Catalog <span class="badge-count" id="nav-prod-count">0</span></a>
+    <a class="sidebar-link" data-view="hero"><i class="fa-solid fa-sliders"></i> Hero &amp; Banners</a>
+    <a class="sidebar-link" data-view="about-content"><i class="fa-solid fa-circle-info"></i> About &amp; FAQs</a>
+
+    <div class="nav-group-label">Data &amp; Sync</div>
+    <a class="sidebar-link" data-view="github-sync"><i class="fa-brands fa-github"></i> GitHub Sync Hub</a>
+    <a class="sidebar-link" data-view="json-editor"><i class="fa-solid fa-code"></i> Direct JSON Editor</a>
+    <a class="sidebar-link" data-view="settings"><i class="fa-solid fa-gear"></i> Settings &amp; Security</a>
+
+    <div class="nav-group-label">Quick Links</div>
+    <a class="sidebar-link" href="/index.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Website</a>
   </nav>
   <div class="sidebar-footer">
-    <a class="sidebar-link" onclick="doLogout()" style="border:none;padding:.5rem 0"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    <div class="github-badge">
+      <i class="fa-brands fa-github"></i>
+      <div>
+        <div style="font-weight:600;color:#fff">Repo: update</div>
+        <div style="font-size:.65rem">branch: main</div>
+      </div>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="doLogout()" style="width:100%"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
   </div>
 </aside>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN WRAPPER -->
 <div class="main">
+  <!-- TOPBAR -->
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:.8rem">
-      <button class="hamburger-admin" onclick="document.getElementById('sidebar').classList.toggle('open')" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <button class="hamburger-admin" onclick="document.getElementById('sidebar').classList.toggle('open')" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
       <div class="topbar-title" id="topbar-title"><i class="fa-solid fa-gauge-high"></i> Dashboard</div>
     </div>
     <div class="topbar-actions">
-      <span class="topbar-user"><i class="fa-solid fa-circle" style="color:var(--success);font-size:8px;margin-right:4px"></i>Logged in as <strong>Admin</strong></span>
-      <button class="btn btn-ghost btn-sm" onclick="doLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      <button class="btn btn-ghost btn-sm" onclick="downloadJsonFile()"><i class="fa-solid fa-download"></i> Download JSON</button>
+      <button class="btn-sync-quick" onclick="switchView('github-sync')"><i class="fa-brands fa-github"></i> GitHub Publish</button>
     </div>
   </div>
 
   <div class="content">
 
-    <!-- ============ DASHBOARD VIEW ============ -->
+    <!-- =========================================================
+         1. VIEW: DASHBOARD
+         ========================================================= -->
     <div id="view-dashboard">
       <div class="stats">
         <div class="stat-card">
           <div class="stat-icon" style="background:rgba(14,165,233,.12);color:var(--accent)"><i class="fa-solid fa-boxes-stacked"></i></div>
-          <div><div class="stat-num" id="stat-total">0</div><div class="stat-label">Total Products</div></div>
+          <div><div class="stat-num" id="stat-total-prod">0</div><div class="stat-label">Total Products</div></div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon" style="background:rgba(22,163,74,.12);color:var(--success)"><i class="fa-solid fa-layer-group"></i></div>
-          <div><div class="stat-num" id="stat-cats">7</div><div class="stat-label">Categories</div></div>
+          <div class="stat-icon" style="background:rgba(168,85,247,.12);color:var(--purple)"><i class="fa-solid fa-layer-group"></i></div>
+          <div><div class="stat-num" id="stat-total-cats">4</div><div class="stat-label">Product Categories</div></div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon" style="background:rgba(168,85,247,.12);color:#a855f7"><i class="fa-solid fa-image"></i></div>
-          <div><div class="stat-num" id="stat-images">0</div><div class="stat-label">With Images</div></div>
+          <div class="stat-icon" style="background:rgba(22,163,74,.12);color:var(--success)"><i class="fa-solid fa-phone"></i></div>
+          <div><div class="stat-num" style="font-size:1.1rem;font-weight:700" id="stat-phone">+91 74173 50021</div><div class="stat-label">Contact Helpline</div></div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon" style="background:rgba(245,158,11,.12);color:var(--warning)"><i class="fa-solid fa-clock"></i></div>
-          <div><div class="stat-num" id="stat-recent">0</div><div class="stat-label">Added This Week</div></div>
+          <div class="stat-icon" style="background:rgba(245,158,11,.12);color:var(--warning)"><i class="fa-solid fa-location-dot"></i></div>
+          <div><div class="stat-num" style="font-size:.95rem;font-weight:700">Kasna Greater Noida</div><div class="stat-label">PIN 201310</div></div>
         </div>
       </div>
+
+      <!-- Quick Action Cards -->
+      <div class="sync-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+          <div>
+            <h3 style="font-size:1.1rem;display:flex;align-items:center;gap:.5rem;margin-bottom:.3rem">
+              <i class="fa-brands fa-github" style="color:var(--accent)"></i> GitHub Centralized JSON Data Engine
+            </h3>
+            <p style="font-size:.82rem;color:var(--text-muted)">
+              All details across the entire website are loaded from <code>data/site-data.json</code>. You can edit visually below, download the JSON, or publish directly via GitHub API.
+            </p>
+          </div>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" onclick="copyJsonToClipboard()"><i class="fa-solid fa-copy"></i> Copy JSON</button>
+            <button class="btn btn-primary btn-sm" onclick="switchView('github-sync')"><i class="fa-solid fa-cloud-arrow-up"></i> Publish to GitHub</button>
+          </div>
+        </div>
+      </div>
+
       <div class="panel">
         <div class="panel-header">
-          <div class="panel-title"><i class="fa-solid fa-list"></i> Recently Added Products</div>
-          <button class="btn btn-primary btn-sm" onclick="switchView('add-product')"><i class="fa-solid fa-plus"></i> Add New</button>
+          <div>
+            <div class="panel-title"><i class="fa-solid fa-list-check"></i> Recent Products</div>
+            <div class="panel-desc">Quick overview of product formulations in the catalog</div>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openProductModal()"><i class="fa-solid fa-plus"></i> Add Product</button>
         </div>
-        <div class="panel-body" style="padding:0"><div id="recent-table-wrap"></div></div>
+        <div class="panel-body" style="padding:0;overflow-x:auto">
+          <div id="dash-products-table-wrap"></div>
+        </div>
       </div>
     </div>
 
-    <!-- ============ ADD PRODUCT VIEW ============ -->
-    <div id="view-add-product" style="display:none">
+    <!-- =========================================================
+         2. VIEW: COMPANY & CONTACT
+         ========================================================= -->
+    <div id="view-company" style="display:none">
       <div class="panel">
         <div class="panel-header">
-          <div class="panel-title"><i class="fa-solid fa-plus-circle"></i> <span id="form-title">Add New Product</span></div>
+          <div>
+            <div class="panel-title"><i class="fa-solid fa-building"></i> Company &amp; Contact Details</div>
+            <div class="panel-desc">Controls phone numbers, WhatsApp, email, office address, and registration information across the entire website.</div>
+          </div>
+          <button class="btn btn-success btn-sm" onclick="saveCompanyDetails()"><i class="fa-solid fa-floppy-disk"></i> Save Details</button>
         </div>
         <div class="panel-body">
-          <form id="product-form" onsubmit="return false">
-            <input type="hidden" id="edit-id" value=""/>
-            <div class="form-row">
+          <form id="form-company" onsubmit="return false">
+            <div class="form-grid-2">
               <div class="form-group">
-                <label for="prod-name">Product Name <span style="color:var(--danger)">*</span></label>
-                <input type="text" id="prod-name" placeholder="e.g. Doxofer Dx Tab" required/>
+                <label>Company Legal Name</label>
+                <input type="text" id="comp-name" placeholder="e.g. STENMED BIOTECH"/>
               </div>
               <div class="form-group">
-                <label for="prod-category">Category <span style="color:var(--danger)">*</span></label>
-                <select id="prod-category" required>
-                  <option value="">Select a category...</option>
-                  <option value="respiratory-pulmonology">Respiratory & Pulmonology</option>
-                  <option value="gastrointestinal-digestive">Gastrointestinal & Digestive Health</option>
-                  <option value="hepatology-liver-care">Hepatology (Liver Care)</option>
-                  <option value="bone-health-minerals">Bone Health & Mineral Supplements</option>
-                  <option value="pediatric-care">Pediatric Care / Pain & Fever Relief</option>
-                  <option value="critical-care-injectables">Critical Care / Injectables</option>
-                  <option value="nutritional-energy-supplements">Nutritional & Energy Supplements</option>
-                </select>
+                <label>Tagline / Motto</label>
+                <input type="text" id="comp-tagline" placeholder="e.g. Trusted Pharmaceutical Distribution"/>
               </div>
             </div>
-            <div class="form-row">
+
+            <div class="form-grid-3">
               <div class="form-group">
-                <label for="prod-composition">Composition / Ingredients</label>
-                <input type="text" id="prod-composition" placeholder="e.g. Ambroxol 30mg + Levosalbutamol 1mg"/>
+                <label>Phone Number (Display)</label>
+                <input type="text" id="comp-phone" placeholder="e.g. +91 74173 50021"/>
               </div>
               <div class="form-group">
-                <label for="prod-form">Dosage Form</label>
-                <select id="prod-form">
-                  <option value="">Select...</option>
-                  <option value="Tablet">Tablet</option>
-                  <option value="Capsule">Capsule</option>
-                  <option value="Syrup">Syrup</option>
-                  <option value="Suspension">Suspension</option>
-                  <option value="Injection">Injection</option>
-                  <option value="Cream">Cream</option>
-                  <option value="Drops">Drops</option>
-                  <option value="Powder">Powder</option>
-                  <option value="Sachet">Sachet</option>
-                  <option value="Other">Other</option>
-                </select>
+                <label>WhatsApp Number (Display)</label>
+                <input type="text" id="comp-whatsapp" placeholder="e.g. +91 74173 50021"/>
+              </div>
+              <div class="form-group">
+                <label>WhatsApp Raw Number (No Spaces/+) </label>
+                <input type="text" id="comp-wa-raw" placeholder="e.g. 917417350021"/>
+                <span class="input-hint"><i class="fa-solid fa-info-circle"></i> Used for wa.me direct links</span>
               </div>
             </div>
-            <div class="form-row">
+
+            <div class="form-grid-2">
               <div class="form-group">
-                <label for="prod-packaging">Packaging / Size</label>
-                <input type="text" id="prod-packaging" placeholder="e.g. 10x10 Alu-Alu, 100ml Bottle"/>
+                <label>Official Email Address</label>
+                <input type="email" id="comp-email" placeholder="e.g. Stenmedbiotech@gmail.com"/>
               </div>
               <div class="form-group">
-                <label for="prod-mrp">MRP (INR)</label>
-                <input type="number" id="prod-mrp" placeholder="e.g. 150" min="0" step="0.01"/>
+                <label>Working Hours</label>
+                <input type="text" id="comp-hours" placeholder="e.g. Mon - Sat: 9:00 AM - 7:00 PM"/>
               </div>
             </div>
+
             <div class="form-group full">
-              <label for="prod-desc">Product Description</label>
-              <textarea id="prod-desc" placeholder="Describe the product usage, benefits, indications etc."></textarea>
+              <label>Full Office / Registered Address</label>
+              <textarea id="comp-address" rows="2" placeholder="e.g. KASNA GREATER NOIDA G.B NAGAR U.P PIN CODE 201310"></textarea>
             </div>
-            <div class="form-group full">
-              <label>Product Image</label>
-              <div class="upload-area" id="upload-area" onclick="document.getElementById('prod-image').click()">
-                <input type="file" class="upload-input" id="prod-image" accept="image/*" onchange="handleImageUpload(event)"/>
-                <i class="fa-solid fa-cloud-arrow-up upload-main-icon" id="upload-icon"></i>
-                <p id="upload-text"><strong>Click to upload</strong> or drag & drop<br>PNG, JPG up to 5MB</p>
-                <img class="upload-preview" id="upload-preview" alt="Preview"/>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>Drug License Number</label>
+                <input type="text" id="comp-dl" placeholder="e.g. UP-GBN-2024-001"/>
+              </div>
+              <div class="form-group">
+                <label>GSTIN</label>
+                <input type="text" id="comp-gstin" placeholder="e.g. 09AAACS1429B1Z0"/>
               </div>
             </div>
-            <div style="display:flex;gap:.7rem;justify-content:flex-end;margin-top:.6rem">
-              <button type="button" class="btn btn-ghost" onclick="resetForm()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
-              <button type="button" class="btn btn-success btn-lg" onclick="saveProduct()"><i class="fa-solid fa-floppy-disk"></i> <span id="save-btn-text">Save Product</span></button>
+
+            <div style="display:flex;justify-content:flex-end;margin-top:1rem">
+              <button class="btn btn-success btn-lg" onclick="saveCompanyDetails()"><i class="fa-solid fa-floppy-disk"></i> Save &amp; Update Site Data</button>
             </div>
           </form>
         </div>
       </div>
     </div>
 
-    <!-- ============ MANAGE PRODUCTS VIEW ============ -->
-    <div id="view-manage-products" style="display:none">
+    <!-- =========================================================
+         3. VIEW: PRODUCT CATALOG
+         ========================================================= -->
+    <div id="view-products" style="display:none">
       <div class="panel">
         <div class="panel-header">
-          <div class="panel-title"><i class="fa-solid fa-boxes-stacked"></i> All Products <span id="products-count" style="font-size:.78rem;color:var(--text-muted);font-weight:400;margin-left:.4rem"></span></div>
+          <div>
+            <div class="panel-title"><i class="fa-solid fa-pills"></i> Product Catalog Manager <span id="prod-total-badge" style="font-size:.75rem;color:var(--text-muted);margin-left:.4rem"></span></div>
+            <div class="panel-desc">Add, edit, or remove medicines, syrups, injections, and suspensions.</div>
+          </div>
           <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
-            <select id="filter-cat" onchange="renderProductsTable()" style="font-size:.8rem;padding:.4rem .7rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text)">
+            <input type="text" id="prod-search-filter" oninput="filterProductsList()" placeholder="Search products..." style="width:200px;font-size:.8rem;padding:.4rem .7rem"/>
+            <select id="prod-cat-filter" onchange="filterProductsList()" style="width:160px;font-size:.8rem;padding:.4rem .7rem">
               <option value="">All Categories</option>
-              <option value="respiratory-pulmonology">Respiratory & Pulmonology</option>
-              <option value="gastrointestinal-digestive">Gastrointestinal & Digestive</option>
-              <option value="hepatology-liver-care">Hepatology (Liver Care)</option>
-              <option value="bone-health-minerals">Bone Health & Minerals</option>
-              <option value="pediatric-care">Pediatric Care</option>
-              <option value="critical-care-injectables">Critical Care / Injectables</option>
-              <option value="nutritional-energy-supplements">Nutritional Supplements</option>
+              <option value="pediatrics">Pediatrics</option>
+              <option value="gynecologist">Gynecologist</option>
+              <option value="gastro">Gastro</option>
+              <option value="physician">Physician</option>
             </select>
-            <select id="filter-source" onchange="renderProductsTable()" style="font-size:.8rem;padding:.4rem .7rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text)">
-              <option value="">All Sources</option>
-              <option value="builtin">Built-in (Original)</option>
-              <option value="admin">Admin Added</option>
-            </select>
-            <button class="btn btn-primary btn-sm" onclick="switchView('add-product')"><i class="fa-solid fa-plus"></i> Add New</button>
+            <button class="btn btn-primary btn-sm" onclick="openProductModal()"><i class="fa-solid fa-plus"></i> Add New Product</button>
           </div>
         </div>
-        <div class="panel-body" style="padding:0;overflow-x:auto"><div id="all-table-wrap"></div></div>
+        <div class="panel-body" style="padding:0;overflow-x:auto">
+          <div id="products-table-wrap"></div>
+        </div>
       </div>
     </div>
 
-    <!-- ============ SETTINGS VIEW ============ -->
+    <!-- =========================================================
+         4. VIEW: HERO & BANNERS
+         ========================================================= -->
+    <div id="view-hero" style="display:none">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title"><i class="fa-solid fa-sliders"></i> Homepage Hero Slides &amp; Highlights</div>
+            <div class="panel-desc">Manage the revolving banners, headlines, and call-to-actions on the homepage.</div>
+          </div>
+          <button class="btn btn-success btn-sm" onclick="saveHeroSlides()"><i class="fa-solid fa-floppy-disk"></i> Save Hero Slides</button>
+        </div>
+        <div class="panel-body">
+          <div id="hero-slides-container"></div>
+          <div style="display:flex;justify-content:flex-end;margin-top:1.5rem">
+            <button class="btn btn-success btn-lg" onclick="saveHeroSlides()"><i class="fa-solid fa-floppy-disk"></i> Save Hero Slides</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         5. VIEW: ABOUT & FAQS
+         ========================================================= -->
+    <div id="view-about-content" style="display:none">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title"><i class="fa-solid fa-circle-info"></i> About Story &amp; FAQs</div>
+            <div class="panel-desc">Configure mission, vision, why choose us pillars, and frequently asked questions.</div>
+          </div>
+          <button class="btn btn-success btn-sm" onclick="saveAboutFaqs()"><i class="fa-solid fa-floppy-disk"></i> Save Content</button>
+        </div>
+        <div class="panel-body">
+          <h4 style="font-size:.9rem;color:var(--accent);margin-bottom:.8rem"><i class="fa-solid fa-bullseye"></i> Mission &amp; Vision</h4>
+          <div class="form-group">
+            <label>Headline</label>
+            <input type="text" id="about-headline" placeholder="Headline"/>
+          </div>
+          <div class="form-group">
+            <label>Our Mission</label>
+            <textarea id="about-mission" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Our Vision</label>
+            <textarea id="about-vision" rows="2"></textarea>
+          </div>
+
+          <hr style="border:none;border-top:1px solid var(--border);margin:1.8rem 0"/>
+
+          <h4 style="font-size:.9rem;color:var(--accent);margin-bottom:.8rem"><i class="fa-solid fa-circle-question"></i> Frequently Asked Questions (FAQs)</h4>
+          <div id="faqs-list-container"></div>
+          <button class="btn btn-ghost btn-sm" onclick="addFaqRow()" style="margin-top:.6rem"><i class="fa-solid fa-plus"></i> Add Another FAQ</button>
+
+          <div style="display:flex;justify-content:flex-end;margin-top:1.5rem">
+            <button class="btn btn-success btn-lg" onclick="saveAboutFaqs()"><i class="fa-solid fa-floppy-disk"></i> Save All Content</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         6. VIEW: GITHUB SYNC HUB
+         ========================================================= -->
+    <div id="view-github-sync" style="display:none">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title"><i class="fa-brands fa-github"></i> GitHub Sync &amp; Deployment Hub</div>
+            <div class="panel-desc">Publish your updated <code>data/site-data.json</code> directly to your GitHub repository to update the live website.</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="sync-steps">
+            <div class="sync-step">
+              <strong>Method 1: Direct 1-Click Commit (Recommended)</strong>
+              <p>Enter your GitHub Personal Access Token once. You can then commit &amp; push your latest site changes directly to GitHub with a single click!</p>
+            </div>
+            <div class="sync-step">
+              <strong>Method 2: Download &amp; Upload</strong>
+              <p>Download the generated <code>site-data.json</code> and upload/replace it in the <code>/data/</code> folder on github.com.</p>
+            </div>
+            <div class="sync-step">
+              <strong>Method 3: Copy to Clipboard</strong>
+              <p>Copy the whole JSON and paste it inside GitHub's web file editor.</p>
+            </div>
+          </div>
+
+          <div class="sync-card">
+            <h4 style="font-size:.95rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem">
+              <i class="fa-solid fa-rocket" style="color:var(--accent)"></i> Publish Directly via GitHub API
+            </h4>
+            <div class="form-grid-3" style="margin-top:1rem">
+              <div class="form-group">
+                <label>GitHub Repository</label>
+                <input type="text" id="gh-repo" value="mardixgartix-hue/update" placeholder="owner/repo"/>
+              </div>
+              <div class="form-group">
+                <label>Branch</label>
+                <input type="text" id="gh-branch" value="main" placeholder="main"/>
+              </div>
+              <div class="form-group">
+                <label>File Path in Repo</label>
+                <input type="text" id="gh-filepath" value="data/site-data.json" placeholder="data/site-data.json"/>
+              </div>
+            </div>
+            <div class="form-group full">
+              <label>GitHub Personal Access Token (PAT)</label>
+              <div style="position:relative">
+                <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx or github_pat_xxxxxxxxxxxx"/>
+              </div>
+              <span class="input-hint"><i class="fa-solid fa-lock"></i> Stored locally in your browser's private storage only. Required scope: <code>repo</code> or <code>Contents: Write</code>.</span>
+            </div>
+            <div class="form-group full">
+              <label>Commit Message</label>
+              <input type="text" id="gh-commit-msg" value="Update site-data.json from Admin Portal" placeholder="Commit message..."/>
+            </div>
+
+            <div id="gh-sync-status" style="display:none;margin:1rem 0;padding:.8rem 1rem;border-radius:8px;font-size:.84rem"></div>
+
+            <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:1rem">
+              <button class="btn btn-primary btn-lg" id="btn-gh-commit" onclick="publishToGitHub()"><i class="fa-solid fa-cloud-arrow-up"></i> Commit &amp; Publish to GitHub</button>
+              <button class="btn btn-ghost" onclick="downloadJsonFile()"><i class="fa-solid fa-download"></i> Download site-data.json</button>
+              <button class="btn btn-ghost" onclick="copyJsonToClipboard()"><i class="fa-solid fa-copy"></i> Copy JSON</button>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem">
+            <h4 style="font-size:.9rem;margin-bottom:.5rem"><i class="fa-solid fa-upload"></i> Import / Restore JSON File</h4>
+            <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:.8rem">Upload an existing <code>site-data.json</code> file to import data into the dashboard.</p>
+            <input type="file" id="json-file-input" accept=".json" onchange="importJsonFile(event)" style="font-size:.85rem"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         7. VIEW: DIRECT JSON EDITOR
+         ========================================================= -->
+    <div id="view-json-editor" style="display:none">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title"><i class="fa-solid fa-code"></i> Direct Raw JSON Editor</div>
+            <div class="panel-desc">View and edit the underlying <code>data/site-data.json</code> structure directly with live syntax validation.</div>
+          </div>
+          <div style="display:flex;gap:.5rem">
+            <button class="btn btn-ghost btn-sm" onclick="prettifyJsonInEditor()"><i class="fa-solid fa-wand-magic-sparkles"></i> Prettify JSON</button>
+            <button class="btn btn-success btn-sm" onclick="applyJsonFromEditor()"><i class="fa-solid fa-check"></i> Apply &amp; Save</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="json-editor-container">
+            <div class="json-editor-toolbar">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent)">data/site-data.json</span>
+              <span id="json-valid-indicator" style="font-size:.75rem;color:#86efac"><i class="fa-solid fa-circle-check"></i> Valid JSON</span>
+            </div>
+            <textarea id="raw-json-textarea" class="json-textarea" spellcheck="false" oninput="validateLiveJson()"></textarea>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;flex-wrap:wrap;gap:1rem">
+            <div id="json-error-msg" style="color:#fca5a5;font-size:.8rem;font-family:'JetBrains Mono',monospace"></div>
+            <div style="display:flex;gap:.6rem">
+              <button class="btn btn-ghost btn-sm" onclick="reloadJsonToEditor()"><i class="fa-solid fa-rotate-left"></i> Revert</button>
+              <button class="btn btn-success btn-lg" onclick="applyJsonFromEditor()"><i class="fa-solid fa-check"></i> Apply Changes to Site</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         8. VIEW: SETTINGS
+         ========================================================= -->
     <div id="view-settings" style="display:none">
       <div class="panel">
         <div class="panel-header">
-          <div class="panel-title"><i class="fa-solid fa-gear"></i> Settings</div>
+          <div>
+            <div class="panel-title"><i class="fa-solid fa-gear"></i> Admin Security &amp; Settings</div>
+            <div class="panel-desc">Change password and manage local cache.</div>
+          </div>
         </div>
         <div class="panel-body">
-          <!-- Change Password -->
-          <div class="settings-card">
-            <h4><i class="fa-solid fa-key"></i> Change Password</h4>
-            <p class="desc">Update your admin login password. You will need to enter the current password first.</p>
-            <div class="form-group">
-              <label for="current-pw">Current Password</label>
-              <div class="pw-field-wrap">
-                <input type="password" id="current-pw" placeholder="Enter current password"/>
-                <button class="pw-toggle" type="button" onclick="toggleField('current-pw')"><i class="fa-solid fa-eye"></i></button>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="new-pw">New Password</label>
-                <div class="pw-field-wrap">
-                  <input type="password" id="new-pw" placeholder="Min. 6 characters"/>
-                  <button class="pw-toggle" type="button" onclick="toggleField('new-pw')"><i class="fa-solid fa-eye"></i></button>
-                </div>
+          <div class="form-grid-2">
+            <div class="sync-step">
+              <strong>Change Admin Password</strong>
+              <div class="form-group" style="margin-top:.8rem">
+                <label>Current Password</label>
+                <input type="password" id="current-pw" placeholder="Current password"/>
               </div>
               <div class="form-group">
-                <label for="confirm-pw">Confirm New Password</label>
-                <div class="pw-field-wrap">
-                  <input type="password" id="confirm-pw" placeholder="Re-enter new password"/>
-                  <button class="pw-toggle" type="button" onclick="toggleField('confirm-pw')"><i class="fa-solid fa-eye"></i></button>
-                </div>
+                <label>New Password</label>
+                <input type="password" id="new-pw" placeholder="Min. 6 chars"/>
               </div>
+              <div class="form-group">
+                <label>Confirm New Password</label>
+                <input type="password" id="confirm-pw" placeholder="Confirm new password"/>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="changeAdminPassword()"><i class="fa-solid fa-key"></i> Update Password</button>
             </div>
-            <div class="pw-msg" id="pw-msg"></div>
-            <button class="btn btn-primary" onclick="changePassword()" style="margin-top:.7rem"><i class="fa-solid fa-check"></i> Update Password</button>
-          </div>
-
-          <!-- Change Security Question Answer -->
-          <div class="settings-card">
-            <h4><i class="fa-solid fa-shield-halved"></i> Security Question</h4>
-            <p class="desc">This is shown when you click "Forgot Password" on the login page.</p>
-            <div class="form-group">
-              <label>Question (fixed)</label>
-              <input type="text" value="What is the name of the company founder & owner?" disabled style="opacity:.6"/>
+            <div class="sync-step">
+              <strong>Reset &amp; Restore Baseline</strong>
+              <p style="margin-bottom:.8rem">Reload the default STENMED BIOTECH JSON baseline data.</p>
+              <button class="btn btn-danger btn-sm" onclick="resetToBaseline()"><i class="fa-solid fa-rotate-left"></i> Reload Baseline Data</button>
             </div>
-            <div class="form-group">
-              <label for="sec-answer-setting">Current Answer</label>
-              <input type="text" id="sec-answer-setting" placeholder="e.g. rahul gupta"/>
-            </div>
-            <div class="pw-msg" id="sec-msg"></div>
-            <button class="btn btn-primary" onclick="updateSecurityAnswer()" style="margin-top:.7rem"><i class="fa-solid fa-check"></i> Update Answer</button>
-          </div>
-
-          <!-- Danger Zone -->
-          <div class="settings-card" style="border-color:rgba(220,38,38,.3)">
-            <h4 style="color:#fca5a5"><i class="fa-solid fa-triangle-exclamation" style="color:var(--danger)"></i> Danger Zone</h4>
-            <p class="desc">Remove all admin-added products. Built-in products will be restored.</p>
-            <button class="btn btn-danger" onclick="resetAllData()"><i class="fa-solid fa-trash"></i> Reset All Admin Data</button>
           </div>
         </div>
       </div>
@@ -460,425 +639,759 @@
   </div><!-- /content -->
 </div><!-- /main -->
 
-<!-- DELETE CONFIRM MODAL -->
-<div class="modal-overlay" id="delete-modal">
+<!-- PRODUCT ADD / EDIT MODAL -->
+<div class="modal-overlay" id="product-modal">
   <div class="modal">
-    <h3><i class="fa-solid fa-triangle-exclamation"></i> Delete Product</h3>
-    <p>Are you sure you want to delete <strong id="delete-name"></strong>? This action cannot be undone.</p>
-    <div class="modal-actions">
-      <button class="btn btn-ghost btn-sm" onclick="closeDeleteModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="confirmDelete()"><i class="fa-solid fa-trash"></i> Delete</button>
-    </div>
+    <h3 id="prod-modal-title"><i class="fa-solid fa-pills" style="color:var(--accent)"></i> Add Product</h3>
+    <form id="form-product-edit" onsubmit="return false" style="margin-top:1rem">
+      <input type="hidden" id="modal-prod-id"/>
+      <div class="form-group">
+        <label>Product Name <span style="color:var(--danger)">*</span></label>
+        <input type="text" id="modal-prod-name" placeholder="e.g. Stencuf Syrup" required/>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Category <span style="color:var(--danger)">*</span></label>
+          <select id="modal-prod-category" required>
+            <option value="pediatrics">Pediatrics</option>
+            <option value="gynecologist">Gynecologist</option>
+            <option value="gastro">Gastro</option>
+            <option value="physician">Physician</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Dosage Form</label>
+          <select id="modal-prod-form">
+            <option value="Syrup">Syrup</option>
+            <option value="Tablet">Tablet</option>
+            <option value="Capsule">Capsule</option>
+            <option value="Suspension">Suspension</option>
+            <option value="Injection">Injection</option>
+            <option value="Drops">Drops</option>
+            <option value="Powder">Powder</option>
+            <option value="Sachet">Sachet</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Composition / Formula</label>
+        <input type="text" id="modal-prod-comp" placeholder="e.g. Levosalbutamol, Ambroxol & Guaiphenesin Syrup"/>
+      </div>
+      <div class="form-group">
+        <label>Indications / Usage</label>
+        <input type="text" id="modal-prod-use" placeholder="e.g. Cough and cold relief"/>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Packaging</label>
+          <input type="text" id="modal-prod-pkg" placeholder="e.g. 100ml Bottle"/>
+        </div>
+        <div class="form-group">
+          <label>MRP (INR)</label>
+          <input type="text" id="modal-prod-mrp" placeholder="e.g. 115.00"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Product Image Path or URL</label>
+        <input type="text" id="modal-prod-img" placeholder="e.g. /assets/images/products/stencuf.jpg"/>
+      </div>
+      <div class="form-group">
+        <label>Detailed Description</label>
+        <textarea id="modal-prod-desc" rows="2" placeholder="Therapeutic action and benefits..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeProductModal()">Cancel</button>
+        <button type="button" class="btn btn-success" onclick="saveProductModal()"><i class="fa-solid fa-floppy-disk"></i> Save Product</button>
+      </div>
+    </form>
   </div>
 </div>
 
-<!-- RESET CONFIRM MODAL -->
-<div class="modal-overlay" id="reset-modal">
-  <div class="modal">
-    <h3><i class="fa-solid fa-triangle-exclamation"></i> Reset All Data</h3>
-    <p>This will remove <strong>all admin-added products</strong> and restore only the original built-in products. Are you sure?</p>
-    <div class="modal-actions">
-      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('reset-modal').classList.remove('show')">Cancel</button>
-      <button class="btn btn-danger" onclick="doResetAll()"><i class="fa-solid fa-trash"></i> Reset Everything</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
+<!-- TOAST NOTIFICATION -->
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i> <span id="toast-text"></span></div>
 
 <script>
 // ══════════════════════════════════════════════
-// AUTH GUARD
+// 1. AUTH GUARD
 // ══════════════════════════════════════════════
-if(sessionStorage.getItem('stenmeds_admin')!=='1') window.location.href='index.html';
-function doLogout(){sessionStorage.removeItem('stenmeds_admin');window.location.href='index.html';}
+if (sessionStorage.getItem('stenmeds_admin') !== '1') {
+  window.location.href = 'index.html';
+}
+function doLogout() {
+  sessionStorage.removeItem('stenmeds_admin');
+  window.location.href = 'index.html';
+}
 
 // ══════════════════════════════════════════════
-// PASSWORD MANAGEMENT
+// 2. CENTRAL STATE & INITIALIZATION
 // ══════════════════════════════════════════════
-const DEFAULT_PW  = 'Sten@dmin2024';
-const DEFAULT_SEC = 'rahul gupta';
+let CURRENT_DATA = null;
 
-function getPassword(){ return localStorage.getItem('stenmeds_admin_pw') || DEFAULT_PW; }
-function setPassword(pw){ localStorage.setItem('stenmeds_admin_pw', pw); }
-function getSecAnswer(){ return localStorage.getItem('stenmeds_admin_sec') || DEFAULT_SEC; }
-function setSecAnswer(a){ localStorage.setItem('stenmeds_admin_sec', a); }
+async function initAdmin() {
+  // Load saved GitHub token & preferences
+  const savedToken = localStorage.getItem('stenmed_gh_token');
+  if (savedToken) document.getElementById('gh-token').value = savedToken;
+  const savedRepo = localStorage.getItem('stenmed_gh_repo');
+  if (savedRepo) document.getElementById('gh-repo').value = savedRepo;
+
+  // Try loading local cached state first or fetch data/site-data.json
+  const localCache = localStorage.getItem('stenmed_live_json');
+  if (localCache) {
+    try {
+      CURRENT_DATA = JSON.parse(localCache);
+    } catch(e){}
+  }
+
+  if (!CURRENT_DATA) {
+    try {
+      const resp = await fetch('/data/site-data.json?v=' + Date.now());
+      if (resp.ok) {
+        CURRENT_DATA = await resp.json();
+      }
+    } catch (e) {
+      console.warn('Could not fetch /data/site-data.json, trying relative path', e);
+      try {
+        const resp2 = await fetch('../data/site-data.json?v=' + Date.now());
+        if (resp2.ok) CURRENT_DATA = await resp2.json();
+      } catch(e2){}
+    }
+  }
+
+  if (CURRENT_DATA) {
+    populateAllViews();
+  }
+}
+
+function persistLiveJson() {
+  if (!CURRENT_DATA) return;
+  CURRENT_DATA.lastUpdated = new Date().toISOString();
+  localStorage.setItem('stenmed_live_json', JSON.stringify(CURRENT_DATA));
+}
 
 // ══════════════════════════════════════════════
-// BUILT-IN PRODUCTS (from your website pages)
+// 3. VIEW SWITCHING
 // ══════════════════════════════════════════════
-var BUILTIN_PRODUCTS = [
-  // ── Respiratory & Pulmonology ──
-  {id:'builtin-resp-1', name:'Doxofer Dx Tab', category:'respiratory-pulmonology', composition:'Doxofylline & Ambroxol Hydrochloride Tablets', form:'Tablet', description:'Used for managing respiratory conditions like asthma and bronchitis.', image:'/assets/images/products/doxofer-dx.png', source:'builtin'},
-  {id:'builtin-resp-2', name:'Stencuf Junior Syrup', category:'respiratory-pulmonology', composition:'Levosalbutamol Sulphate, Ambroxol Hydrochloride & Guaiphenesin Syrup', form:'Syrup', description:'Pediatric cough formula for chest congestion and cough.', image:'/assets/images/products/stencuf-junior.png', source:'builtin'},
-  // ── Gastrointestinal & Digestive ──
-  {id:'builtin-gi-1', name:'Gasomed Quick Relief', category:'gastrointestinal-digestive', composition:'Aluminium Hydroxide, Magnesium Hydroxide & Simethicone', form:'Suspension', description:'Formulated for fast relief from acidity, heartburn, and abdominal gas.', image:'/assets/images/products/gasomed.png', source:'builtin'},
-  {id:'builtin-gi-2', name:'Stengut Suspension', category:'gastrointestinal-digestive', composition:'Sucralfate & Oxetacaine Suspension', form:'Suspension', description:'Directed toward gut health and digestive relief.', image:'/assets/images/products/stengut.png', source:'builtin'},
-  // ── Hepatology (Liver Care) ──
-  {id:'builtin-hep-1', name:'Hepato B6 Syrup', category:'hepatology-liver-care', composition:'Silymarin, L-Ornithine L-Aspartate & Pyridoxine Hydrochloride', form:'Syrup', description:'Liver care supplement with Vitamin B6 support.', image:'/assets/images/products/hepato-b6.png', source:'builtin'},
-  {id:'builtin-hep-2', name:'Stenliv-DS Syrup', category:'hepatology-liver-care', composition:'Silymarin, Tricholine Citrate & Zinc Sulphate', form:'Syrup', description:'Double-strength liver tonic for hepatoprotection.', image:'/assets/images/products/stenliv-ds.png', source:'builtin'},
-  // ── Bone Health & Minerals ──
-  {id:'builtin-bone-1', name:'Stencal Plus Tab', category:'bone-health-minerals', composition:'Calcium Carbonate, Vitamin D3, Zinc & Magnesium', form:'Tablet', description:'Calcium supplement for bone health and osteoporosis prevention.', image:'/assets/images/products/stencal-plus.png', source:'builtin'},
-  {id:'builtin-bone-2', name:'Osteosafe-D3 Sachet', category:'bone-health-minerals', composition:'Cholecalciferol 60000 IU', form:'Sachet', description:'High-dose Vitamin D3 sachet for bone density support.', image:'/assets/images/products/osteosafe-d3.png', source:'builtin'},
-  // ── Pediatric Care ──
-  {id:'builtin-ped-1', name:'Stenpara Junior Drops', category:'pediatric-care', composition:'Paracetamol 150mg/ml Oral Drops', form:'Drops', description:'Safe antipyretic drops for infants for fever and mild pain.', image:'/assets/images/products/stenpara-junior.png', source:'builtin'},
-  {id:'builtin-ped-2', name:'Stenbruf-P Syrup', category:'pediatric-care', composition:'Ibuprofen & Paracetamol Suspension', form:'Syrup', description:'Dual-action analgesic and antipyretic syrup for children.', image:'/assets/images/products/stenbruf-p.png', source:'builtin'},
-  // ── Critical Care / Injectables ──
-  {id:'builtin-crit-1', name:'Stenpan-40 IV', category:'critical-care-injectables', composition:'Pantoprazole Sodium 40mg Injection', form:'Injection', description:'Hospital-grade proton pump inhibitor for acute GI conditions.', image:'/assets/images/products/stenpan-40.png', source:'builtin'},
-  {id:'builtin-crit-2', name:'Ondex-4 Injection', category:'critical-care-injectables', composition:'Ondansetron 4mg/2ml Injection', form:'Injection', description:'Antiemetic injection for post-operative and chemotherapy-related nausea.', image:'/assets/images/products/ondex-4.png', source:'builtin'},
-  // ── Nutritional & Energy Supplements ──
-  {id:'builtin-nutr-1', name:'StenPro Protein Powder', category:'nutritional-energy-supplements', composition:'Whey Protein, DHA, Vitamins & Minerals', form:'Powder', description:'Complete protein supplement for immunity, stamina, and wellness.', image:'/assets/images/products/stenpro.png', source:'builtin'},
-  {id:'builtin-nutr-2', name:'EnergySten Sachet', category:'nutritional-energy-supplements', composition:'Electrolytes, Dextrose & Vitamin C', form:'Sachet', description:'Instant energy and hydration formula with essential electrolytes.', image:'/assets/images/products/energysten.png', source:'builtin'},
-  {id:'builtin-nutr-3', name:'Stenvita Gold Capsules', category:'nutritional-energy-supplements', composition:'Multivitamin, Multimineral, Ginseng & Ginkgo Biloba', form:'Capsule', description:'Premium daily multivitamin for energy and cognitive support.', image:'/assets/images/products/stenvita-gold.png', source:'builtin'},
-  {id:'builtin-nutr-4', name:'Iron-Sten XT Syrup', category:'nutritional-energy-supplements', composition:'Ferrous Ascorbate, Folic Acid & Zinc Sulphate', form:'Syrup', description:'Iron supplement syrup for anemia prevention and hemoglobin support.', image:'/assets/images/products/iron-sten.png', source:'builtin'},
-];
-
-// ══════════════════════════════════════════════
-// CATEGORY META
-// ══════════════════════════════════════════════
-var CATS = {
-  'respiratory-pulmonology':       {name:'Respiratory & Pulmonology',        badge:'badge-blue'},
-  'gastrointestinal-digestive':    {name:'Gastrointestinal & Digestive',     badge:'badge-teal'},
-  'hepatology-liver-care':         {name:'Hepatology (Liver Care)',          badge:'badge-amber'},
-  'bone-health-minerals':          {name:'Bone Health & Minerals',           badge:'badge-purple'},
-  'pediatric-care':                {name:'Pediatric Care / Pain & Fever',    badge:'badge-pink'},
-  'critical-care-injectables':     {name:'Critical Care / Injectables',      badge:'badge-red'},
-  'nutritional-energy-supplements':{name:'Nutritional & Energy Supplements', badge:'badge-green'},
+const views = ['dashboard', 'company', 'products', 'hero', 'about-content', 'github-sync', 'json-editor', 'settings'];
+const viewMeta = {
+  'dashboard': { title: 'Dashboard', icon: 'fa-gauge-high' },
+  'company': { title: 'Company & Contact Details', icon: 'fa-building' },
+  'products': { title: 'Product Catalog Manager', icon: 'fa-pills' },
+  'hero': { title: 'Hero & Banners', icon: 'fa-sliders' },
+  'about-content': { title: 'About Story & FAQs', icon: 'fa-circle-info' },
+  'github-sync': { title: 'GitHub Sync & Export Hub', icon: 'fa-brands fa-github' },
+  'json-editor': { title: 'Direct JSON Editor', icon: 'fa-code' },
+  'settings': { title: 'Admin Settings', icon: 'fa-gear' }
 };
 
-// ══════════════════════════════════════════════
-// LOCAL STORAGE HELPERS
-// ══════════════════════════════════════════════
-function getAdminProducts(){ return JSON.parse(localStorage.getItem('stenmeds_products')||'[]'); }
-function saveAdminProducts(arr){ localStorage.setItem('stenmeds_products', JSON.stringify(arr)); }
-function getRemovedIds(){ return JSON.parse(localStorage.getItem('stenmeds_removed')||'[]'); }
-function saveRemovedIds(arr){ localStorage.setItem('stenmeds_removed', JSON.stringify(arr)); }
-
-// Get ALL products = built-in (not removed) + admin-added
-function getAllProducts(){
-  var removed = getRemovedIds();
-  var builtins = BUILTIN_PRODUCTS.filter(function(p){ return removed.indexOf(p.id)===-1; });
-  var admin = getAdminProducts().map(function(p){ p.source='admin'; return p; });
-  return builtins.concat(admin);
-}
-
-// ══════════════════════════════════════════════
-// VIEW SWITCHING
-// ══════════════════════════════════════════════
-var views = ['dashboard','add-product','manage-products','settings'];
-var viewIcons = {'dashboard':'fa-gauge-high','add-product':'fa-plus-circle','manage-products':'fa-boxes-stacked','settings':'fa-gear'};
-var viewLabels = {'dashboard':'Dashboard','add-product':'Add New Product','manage-products':'All Products','settings':'Settings'};
-
-function switchView(v){
-  views.forEach(function(vw){
-    document.getElementById('view-'+vw).style.display = vw===v?'':'none';
+function switchView(v) {
+  views.forEach(vw => {
+    const el = document.getElementById('view-' + vw);
+    if (el) el.style.display = (vw === v) ? '' : 'none';
   });
-  document.querySelectorAll('.sidebar-link[data-view]').forEach(function(l){
-    l.classList.toggle('active',l.dataset.view===v);
+  document.querySelectorAll('.sidebar-link[data-view]').forEach(l => {
+    l.classList.toggle('active', l.dataset.view === v);
   });
-  document.getElementById('topbar-title').innerHTML='<i class="fa-solid '+viewIcons[v]+'"></i> '+viewLabels[v];
-  if(v==='dashboard') refreshDashboard();
-  if(v==='manage-products') renderProductsTable();
-  if(v==='settings') loadSettings();
+  const meta = viewMeta[v] || { title: 'Admin Panel', icon: 'fa-gauge-high' };
+  document.getElementById('topbar-title').innerHTML = `<i class="fa-solid ${meta.icon}"></i> ${meta.title}`;
+  
+  if (v === 'json-editor') reloadJsonToEditor();
+  if (v === 'products') renderProductsList();
+  
   document.getElementById('sidebar').classList.remove('open');
 }
-document.querySelectorAll('.sidebar-link[data-view]').forEach(function(l){
-  l.addEventListener('click',function(){switchView(l.dataset.view);});
+
+document.querySelectorAll('.sidebar-link[data-view]').forEach(l => {
+  l.addEventListener('click', () => switchView(l.dataset.view));
 });
 
 // ══════════════════════════════════════════════
-// IMAGE UPLOAD
+// 4. POPULATE ALL VIEWS FROM CURRENT_DATA
 // ══════════════════════════════════════════════
-var uploadedImageData = null;
+function populateAllViews() {
+  if (!CURRENT_DATA) return;
+  const d = CURRENT_DATA;
 
-function handleImageUpload(e){
-  var file = e.target.files[0];
-  if(!file) return;
-  if(file.size > 5*1024*1024){showToast('Image must be under 5MB','error');return;}
-  var reader = new FileReader();
-  reader.onload = function(ev){
-    uploadedImageData = ev.target.result;
-    var prev = document.getElementById('upload-preview');
-    prev.src = uploadedImageData; prev.style.display = 'block';
-    document.getElementById('upload-icon').style.display = 'none';
-    document.getElementById('upload-text').innerHTML = '<strong>Image attached</strong> — click to change';
-    document.getElementById('upload-area').classList.add('has-image');
-  };
-  reader.readAsDataURL(file);
-}
-
-// ══════════════════════════════════════════════
-// SAVE PRODUCT (ADD / EDIT)
-// ══════════════════════════════════════════════
-function saveProduct(){
-  var name = document.getElementById('prod-name').value.trim();
-  var cat  = document.getElementById('prod-category').value;
-  if(!name){showToast('Product name is required','error');return;}
-  if(!cat){showToast('Please select a category','error');return;}
-
-  var product = {
-    id: document.getElementById('edit-id').value || Date.now().toString(36)+Math.random().toString(36).slice(2,6),
-    name: name,
-    category: cat,
-    composition: document.getElementById('prod-composition').value.trim(),
-    form: document.getElementById('prod-form').value,
-    packaging: document.getElementById('prod-packaging').value.trim(),
-    mrp: document.getElementById('prod-mrp').value,
-    description: document.getElementById('prod-desc').value.trim(),
-    image: uploadedImageData||null,
-    source: 'admin',
-    addedAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  };
-
-  var all = getAdminProducts();
-  var editId = document.getElementById('edit-id').value;
-  if(editId){
-    // Editing: could be admin or a rebuilt builtin
-    var idx = all.findIndex(function(p){return p.id===editId;});
-    if(idx>=0){
-      product.addedAt=all[idx].addedAt;
-      if(!product.image) product.image=all[idx].image;
-      all[idx]=product;
-    } else {
-      // Was a built-in that was edited — add as new admin product with same id
-      product.addedAt = new Date().toISOString();
-      all.unshift(product);
-      // Remove the builtin version
-      var rem = getRemovedIds();
-      if(rem.indexOf(editId)===-1){ rem.push(editId); saveRemovedIds(rem); }
-    }
-    showToast('Product updated successfully!');
-  } else {
-    all.unshift(product);
-    showToast('Product added successfully!');
+  // 1. Dashboard stats
+  document.getElementById('stat-total-prod').textContent = (d.products || []).length;
+  document.getElementById('nav-prod-count').textContent = (d.products || []).length;
+  document.getElementById('stat-total-cats').textContent = (d.categories || []).length;
+  if (d.company && d.company.phone) {
+    document.getElementById('stat-phone').textContent = d.company.phone;
   }
-  saveAdminProducts(all);
-  resetForm();
-  switchView('manage-products');
-}
 
-function resetForm(){
-  document.getElementById('product-form').reset();
-  document.getElementById('edit-id').value='';
-  uploadedImageData=null;
-  document.getElementById('upload-preview').style.display='none';
-  document.getElementById('upload-icon').style.display='';
-  document.getElementById('upload-text').innerHTML='<strong>Click to upload</strong> or drag & drop<br>PNG, JPG up to 5MB';
-  document.getElementById('upload-area').classList.remove('has-image');
-  document.getElementById('form-title').textContent='Add New Product';
-  document.getElementById('save-btn-text').textContent='Save Product';
-}
-
-// ══════════════════════════════════════════════
-// EDIT PRODUCT
-// ══════════════════════════════════════════════
-function editProduct(id){
-  var all = getAllProducts();
-  var p = all.find(function(x){return x.id===id;});
-  if(!p) return;
-  switchView('add-product');
-  document.getElementById('edit-id').value = p.id;
-  document.getElementById('prod-name').value = p.name;
-  document.getElementById('prod-category').value = p.category;
-  document.getElementById('prod-composition').value = p.composition||'';
-  document.getElementById('prod-form').value = p.form||'';
-  document.getElementById('prod-packaging').value = p.packaging||'';
-  document.getElementById('prod-mrp').value = p.mrp||'';
-  document.getElementById('prod-desc').value = p.description||'';
-  if(p.image){
-    uploadedImageData = p.image;
-    var prev = document.getElementById('upload-preview');
-    prev.src=p.image; prev.style.display='block';
-    document.getElementById('upload-icon').style.display='none';
-    document.getElementById('upload-text').innerHTML='<strong>Current image</strong> — click to change';
-    document.getElementById('upload-area').classList.add('has-image');
+  // 2. Company View
+  if (d.company) {
+    const c = d.company;
+    document.getElementById('comp-name').value = c.name || '';
+    document.getElementById('comp-tagline').value = c.tagline || '';
+    document.getElementById('comp-phone').value = c.phone || '';
+    document.getElementById('comp-whatsapp').value = c.whatsapp || '';
+    document.getElementById('comp-wa-raw').value = c.whatsappNumber || '';
+    document.getElementById('comp-email').value = c.email || '';
+    document.getElementById('comp-hours').value = c.workingHours || '';
+    document.getElementById('comp-address').value = c.address || '';
+    document.getElementById('comp-dl').value = c.dlNumber || '';
+    document.getElementById('comp-gstin').value = c.gstin || '';
   }
-  document.getElementById('form-title').textContent='Edit Product';
-  document.getElementById('save-btn-text').textContent='Update Product';
-}
 
-// ══════════════════════════════════════════════
-// DELETE PRODUCT
-// ══════════════════════════════════════════════
-var deleteTargetId = null;
-function deleteProduct(id){
-  var all = getAllProducts();
-  var p = all.find(function(x){return x.id===id;});
-  if(!p) return;
-  deleteTargetId = id;
-  document.getElementById('delete-name').textContent = p.name;
-  document.getElementById('delete-modal').classList.add('show');
-}
-function closeDeleteModal(){document.getElementById('delete-modal').classList.remove('show');deleteTargetId=null;}
-function confirmDelete(){
-  if(!deleteTargetId) return;
-  // Check if it's a builtin product
-  if(deleteTargetId.indexOf('builtin-')===0){
-    var rem = getRemovedIds();
-    if(rem.indexOf(deleteTargetId)===-1){ rem.push(deleteTargetId); saveRemovedIds(rem); }
-  } else {
-    // Admin-added: remove from array
-    var all = getAdminProducts();
-    all = all.filter(function(p){return p.id!==deleteTargetId;});
-    saveAdminProducts(all);
+  // 3. Products
+  renderProductsList();
+  renderDashboardProductsTable();
+
+  // 4. Hero Slides
+  renderHeroSlidesForm();
+
+  // 5. About & FAQs
+  if (d.about) {
+    document.getElementById('about-headline').value = d.about.headline || '';
+    document.getElementById('about-mission').value = d.about.mission || '';
+    document.getElementById('about-vision').value = d.about.vision || '';
   }
-  closeDeleteModal();
-  showToast('Product removed.');
-  renderProductsTable();
-  refreshDashboard();
+  renderFaqsList();
+
+  // 6. JSON Editor
+  reloadJsonToEditor();
 }
 
 // ══════════════════════════════════════════════
-// TABLE RENDERER
+// 5. COMPANY DETAILS SAVE
 // ══════════════════════════════════════════════
-function buildTable(products, showActions){
-  if(!products.length) return '<div class="empty-state"><i class="fa-solid fa-inbox"></i><p>No products found.</p></div>';
-  var html = '<table class="products-table"><thead><tr><th>Image</th><th>Product Name</th><th>Category</th><th>Form</th><th>Source</th>'+(showActions?'<th style="text-align:right">Actions</th>':'')+'</tr></thead><tbody>';
-  products.forEach(function(p){
-    var cat = CATS[p.category]||{name:p.category,badge:'badge-blue'};
-    var imgCell;
-    if(p.image && p.image.indexOf('data:')===0){
-      imgCell = '<img src="'+p.image+'" class="product-thumb" alt="'+p.name+'"/>';
-    } else if(p.image){
-      imgCell = '<img src="'+p.image+'" class="product-thumb" alt="'+p.name+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"/><div class="product-thumb-placeholder" style="display:none"><i class="fa-solid fa-image"></i></div>';
-    } else {
-      imgCell = '<div class="product-thumb-placeholder"><i class="fa-solid fa-image"></i></div>';
-    }
-    var srcBadge = p.source==='builtin'
-      ? '<span class="badge badge-default badge-source">Built-in</span>'
-      : '<span class="badge badge-green badge-source">Admin</span>';
-    html += '<tr>'
-      + '<td>'+imgCell+'</td>'
-      + '<td><strong>'+p.name+'</strong>'+(p.composition?'<br><span style="font-size:.75rem;color:var(--text-muted)">'+p.composition+'</span>':'')+'</td>'
-      + '<td><span class="badge '+cat.badge+'">'+cat.name+'</span></td>'
-      + '<td>'+(p.form||'--')+'</td>'
-      + '<td>'+srcBadge+'</td>';
-    if(showActions){
-      html += '<td style="text-align:right;white-space:nowrap">'
-        + '<button class="btn btn-ghost btn-sm" onclick="editProduct(\''+p.id+'\')"><i class="fa-solid fa-pen-to-square"></i></button> '
-        + '<button class="btn btn-danger btn-sm" onclick="deleteProduct(\''+p.id+'\')"><i class="fa-solid fa-trash"></i></button>'
-        + '</td>';
+function saveCompanyDetails() {
+  if (!CURRENT_DATA) return;
+  CURRENT_DATA.company = CURRENT_DATA.company || {};
+  const c = CURRENT_DATA.company;
+  c.name = document.getElementById('comp-name').value.trim();
+  c.tagline = document.getElementById('comp-tagline').value.trim();
+  c.phone = document.getElementById('comp-phone').value.trim();
+  c.whatsapp = document.getElementById('comp-whatsapp').value.trim();
+  c.whatsappNumber = document.getElementById('comp-wa-raw').value.trim();
+  c.email = document.getElementById('comp-email').value.trim();
+  c.workingHours = document.getElementById('comp-hours').value.trim();
+  c.address = document.getElementById('comp-address').value.trim();
+  c.dlNumber = document.getElementById('comp-dl').value.trim();
+  c.gstin = document.getElementById('comp-gstin').value.trim();
+
+  persistLiveJson();
+  showToast('Company details saved in JSON!');
+  populateAllViews();
+}
+
+// ══════════════════════════════════════════════
+// 6. PRODUCT CATALOG CRUD
+// ══════════════════════════════════════════════
+function renderProductsList() {
+  if (!CURRENT_DATA || !CURRENT_DATA.products) return;
+  const search = (document.getElementById('prod-search-filter').value || '').toLowerCase();
+  const catFilter = document.getElementById('prod-cat-filter').value;
+
+  let filtered = CURRENT_DATA.products.filter(p => {
+    const matchSearch = (p.name || '').toLowerCase().includes(search) || (p.composition || '').toLowerCase().includes(search);
+    const matchCat = !catFilter || p.category === catFilter;
+    return matchSearch && matchCat;
+  });
+
+  document.getElementById('prod-total-badge').textContent = `(${filtered.length} of ${CURRENT_DATA.products.length})`;
+  document.getElementById('products-table-wrap').innerHTML = buildProductTableHtml(filtered, true);
+}
+
+function renderDashboardProductsTable() {
+  if (!CURRENT_DATA || !CURRENT_DATA.products) return;
+  const recent = CURRENT_DATA.products.slice(0, 6);
+  document.getElementById('dash-products-table-wrap').innerHTML = buildProductTableHtml(recent, false);
+}
+
+function filterProductsList() {
+  renderProductsList();
+}
+
+const CAT_BADGES = {
+  'pediatrics': 'badge-pink',
+  'gynecologist': 'badge-purple',
+  'gastro': 'badge-teal',
+  'physician': 'badge-blue'
+};
+
+function buildProductTableHtml(products, showActions) {
+  if (!products.length) {
+    return '<div style="text-align:center;padding:2.5rem;color:var(--text-muted)"><i class="fa-solid fa-box-open" style="font-size:2rem;margin-bottom:.5rem;display:block;opacity:.4"></i>No products found.</div>';
+  }
+
+  let html = '<table class="products-table"><thead><tr><th>Image</th><th>Product Name &amp; Formula</th><th>Category</th><th>Form</th><th>Packaging</th>' + (showActions ? '<th style="text-align:right">Actions</th>' : '') + '</tr></thead><tbody>';
+
+  products.forEach(p => {
+    const badgeCls = CAT_BADGES[p.category] || 'badge-blue';
+    const imgHtml = p.image ? `<img src="${p.image}" class="product-thumb" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="product-thumb-placeholder" style="display:none"><i class="fa-solid fa-pills"></i></div>` : `<div class="product-thumb-placeholder"><i class="fa-solid fa-pills"></i></div>`;
+
+    html += `<tr>
+      <td>${imgHtml}</td>
+      <td>
+        <strong>${p.name}</strong>
+        ${p.composition ? `<div style="font-size:.75rem;color:var(--text-muted)">${p.composition}</div>` : ''}
+      </td>
+      <td><span class="badge ${badgeCls}">${p.category}</span></td>
+      <td>${p.form || '--'}</td>
+      <td><span style="font-size:.78rem">${p.packaging || '--'}</span></td>`;
+
+    if (showActions) {
+      html += `<td style="text-align:right;white-space:nowrap">
+        <button class="btn btn-ghost btn-sm" onclick="editProductModal('${p.id}')" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button class="btn btn-danger btn-sm" onclick="deleteProductById('${p.id}')" title="Delete"><i class="fa-solid fa-trash"></i></button>
+      </td>`;
     }
     html += '</tr>';
   });
+
   html += '</tbody></table>';
   return html;
 }
 
-function renderProductsTable(){
-  var all = getAllProducts();
-  var filterCat = document.getElementById('filter-cat').value;
-  var filterSrc = document.getElementById('filter-source').value;
-  var filtered = all;
-  if(filterCat) filtered = filtered.filter(function(p){return p.category===filterCat;});
-  if(filterSrc) filtered = filtered.filter(function(p){return p.source===filterSrc;});
-  document.getElementById('all-table-wrap').innerHTML = buildTable(filtered, true);
-  document.getElementById('products-count').textContent = '('+filtered.length+' of '+all.length+')';
+function openProductModal() {
+  document.getElementById('modal-prod-id').value = '';
+  document.getElementById('modal-prod-name').value = '';
+  document.getElementById('modal-prod-category').value = 'pediatrics';
+  document.getElementById('modal-prod-form').value = 'Syrup';
+  document.getElementById('modal-prod-comp').value = '';
+  document.getElementById('modal-prod-use').value = '';
+  document.getElementById('modal-prod-pkg').value = '';
+  document.getElementById('modal-prod-mrp').value = '';
+  document.getElementById('modal-prod-img').value = '';
+  document.getElementById('modal-prod-desc').value = '';
+  document.getElementById('prod-modal-title').innerHTML = '<i class="fa-solid fa-plus-circle" style="color:var(--accent)"></i> Add Product';
+  document.getElementById('product-modal').classList.add('show');
+}
+
+function closeProductModal() {
+  document.getElementById('product-modal').classList.remove('show');
+}
+
+function editProductModal(id) {
+  const p = (CURRENT_DATA.products || []).find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('modal-prod-id').value = p.id;
+  document.getElementById('modal-prod-name').value = p.name || '';
+  document.getElementById('modal-prod-category').value = p.category || 'pediatrics';
+  document.getElementById('modal-prod-form').value = p.form || 'Syrup';
+  document.getElementById('modal-prod-comp').value = p.composition || '';
+  document.getElementById('modal-prod-use').value = p.use || '';
+  document.getElementById('modal-prod-pkg').value = p.packaging || '';
+  document.getElementById('modal-prod-mrp').value = p.mrp || '';
+  document.getElementById('modal-prod-img').value = p.image || '';
+  document.getElementById('modal-prod-desc').value = p.description || '';
+  document.getElementById('prod-modal-title').innerHTML = '<i class="fa-solid fa-pen-to-square" style="color:var(--accent)"></i> Edit Product';
+  document.getElementById('product-modal').classList.add('show');
+}
+
+function saveProductModal() {
+  const name = document.getElementById('modal-prod-name').value.trim();
+  if (!name) { showToast('Product name is required', 'error'); return; }
+
+  const id = document.getElementById('modal-prod-id').value || 'prod-' + Date.now().toString(36);
+  const newProd = {
+    id: id,
+    name: name,
+    category: document.getElementById('modal-prod-category').value,
+    form: document.getElementById('modal-prod-form').value,
+    composition: document.getElementById('modal-prod-comp').value.trim(),
+    use: document.getElementById('modal-prod-use').value.trim(),
+    packaging: document.getElementById('modal-prod-pkg').value.trim(),
+    mrp: document.getElementById('modal-prod-mrp').value.trim(),
+    image: document.getElementById('modal-prod-img').value.trim(),
+    description: document.getElementById('modal-prod-desc').value.trim(),
+    inStock: true
+  };
+
+  CURRENT_DATA.products = CURRENT_DATA.products || [];
+  const idx = CURRENT_DATA.products.findIndex(x => x.id === id);
+  if (idx >= 0) {
+    CURRENT_DATA.products[idx] = newProd;
+    showToast('Product updated!');
+  } else {
+    CURRENT_DATA.products.unshift(newProd);
+    showToast('Product added!');
+  }
+
+  closeProductModal();
+  persistLiveJson();
+  populateAllViews();
+}
+
+function deleteProductById(id) {
+  if (!confirm('Are you sure you want to remove this product from site data?')) return;
+  CURRENT_DATA.products = (CURRENT_DATA.products || []).filter(p => p.id !== id);
+  persistLiveJson();
+  populateAllViews();
+  showToast('Product removed.');
 }
 
 // ══════════════════════════════════════════════
-// DASHBOARD STATS
+// 7. HERO SLIDES
 // ══════════════════════════════════════════════
-function refreshDashboard(){
-  var all = getAllProducts();
-  document.getElementById('stat-total').textContent = all.length;
-  document.getElementById('stat-images').textContent = all.filter(function(p){return !!p.image;}).length;
-  var weekAgo = Date.now() - 7*24*60*60*1000;
-  document.getElementById('stat-recent').textContent = all.filter(function(p){return p.addedAt && new Date(p.addedAt).getTime()>weekAgo;}).length;
-  var recent = all.slice(0,5);
-  document.getElementById('recent-table-wrap').innerHTML = buildTable(recent, false);
+function renderHeroSlidesForm() {
+  if (!CURRENT_DATA || !CURRENT_DATA.heroSlides) return;
+  const container = document.getElementById('hero-slides-container');
+  let html = '';
+  CURRENT_DATA.heroSlides.forEach((slide, idx) => {
+    html += `
+      <div class="sync-step" style="margin-bottom:1rem">
+        <strong style="font-size:.9rem;color:#fff;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem">
+          <i class="fa-solid fa-image" style="color:var(--accent)"></i> Slide #${idx + 1}
+        </strong>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="hero-title-input" data-idx="${idx}" value="${slide.title || ''}"/>
+          </div>
+          <div class="form-group">
+            <label>Highlight Word / Phrase</label>
+            <input type="text" class="hero-highlight-input" data-idx="${idx}" value="${slide.highlight || ''}"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subtitle / Description</label>
+          <textarea class="hero-sub-input" data-idx="${idx}" rows="2">${slide.subtitle || ''}</textarea>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Primary Button Text</label>
+            <input type="text" class="hero-pbtn-input" data-idx="${idx}" value="${slide.primaryBtnText || ''}"/>
+          </div>
+          <div class="form-group">
+            <label>Primary Button Link</label>
+            <input type="text" class="hero-plink-input" data-idx="${idx}" value="${slide.primaryBtnLink || ''}"/>
+          </div>
+        </div>
+      </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function saveHeroSlides() {
+  if (!CURRENT_DATA || !CURRENT_DATA.heroSlides) return;
+  document.querySelectorAll('.hero-title-input').forEach(inp => {
+    const idx = parseInt(inp.dataset.idx, 10);
+    if (CURRENT_DATA.heroSlides[idx]) {
+      CURRENT_DATA.heroSlides[idx].title = inp.value.trim();
+    }
+  });
+  document.querySelectorAll('.hero-highlight-input').forEach(inp => {
+    const idx = parseInt(inp.dataset.idx, 10);
+    if (CURRENT_DATA.heroSlides[idx]) {
+      CURRENT_DATA.heroSlides[idx].highlight = inp.value.trim();
+    }
+  });
+  document.querySelectorAll('.hero-sub-input').forEach(inp => {
+    const idx = parseInt(inp.dataset.idx, 10);
+    if (CURRENT_DATA.heroSlides[idx]) {
+      CURRENT_DATA.heroSlides[idx].subtitle = inp.value.trim();
+    }
+  });
+  document.querySelectorAll('.hero-pbtn-input').forEach(inp => {
+    const idx = parseInt(inp.dataset.idx, 10);
+    if (CURRENT_DATA.heroSlides[idx]) {
+      CURRENT_DATA.heroSlides[idx].primaryBtnText = inp.value.trim();
+    }
+  });
+  document.querySelectorAll('.hero-plink-input').forEach(inp => {
+    const idx = parseInt(inp.dataset.idx, 10);
+    if (CURRENT_DATA.heroSlides[idx]) {
+      CURRENT_DATA.heroSlides[idx].primaryBtnLink = inp.value.trim();
+    }
+  });
+
+  persistLiveJson();
+  showToast('Hero slides saved!');
 }
 
 // ══════════════════════════════════════════════
-// SETTINGS — CHANGE PASSWORD
+// 8. ABOUT & FAQS
 // ══════════════════════════════════════════════
-function loadSettings(){
-  document.getElementById('sec-answer-setting').value = getSecAnswer();
+function renderFaqsList() {
+  if (!CURRENT_DATA || !CURRENT_DATA.faqs) return;
+  const container = document.getElementById('faqs-list-container');
+  let html = '';
+  CURRENT_DATA.faqs.forEach((faq, idx) => {
+    html += `
+      <div class="sync-step" style="margin-bottom:.8rem;position:relative">
+        <button type="button" class="btn btn-danger btn-sm" onclick="removeFaqRow(${idx})" style="position:absolute;right:10px;top:10px;padding:3px 8px"><i class="fa-solid fa-xmark"></i></button>
+        <div class="form-group" style="padding-right:40px">
+          <label>Question #${idx + 1}</label>
+          <input type="text" class="faq-q-input" data-idx="${idx}" value="${faq.q || ''}"/>
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label>Answer</label>
+          <textarea class="faq-a-input" data-idx="${idx}" rows="2">${faq.a || ''}</textarea>
+        </div>
+      </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function addFaqRow() {
+  CURRENT_DATA.faqs = CURRENT_DATA.faqs || [];
+  CURRENT_DATA.faqs.push({ q: 'New Question?', a: 'Answer here.' });
+  renderFaqsList();
+}
+
+function removeFaqRow(idx) {
+  if (!CURRENT_DATA || !CURRENT_DATA.faqs) return;
+  CURRENT_DATA.faqs.splice(idx, 1);
+  renderFaqsList();
+}
+
+function saveAboutFaqs() {
+  if (!CURRENT_DATA) return;
+  CURRENT_DATA.about = CURRENT_DATA.about || {};
+  CURRENT_DATA.about.headline = document.getElementById('about-headline').value.trim();
+  CURRENT_DATA.about.mission = document.getElementById('about-mission').value.trim();
+  CURRENT_DATA.about.vision = document.getElementById('about-vision').value.trim();
+
+  // Save FAQs
+  const qInputs = document.querySelectorAll('.faq-q-input');
+  const aInputs = document.querySelectorAll('.faq-a-input');
+  const newFaqs = [];
+  qInputs.forEach((qInp, idx) => {
+    const q = qInp.value.trim();
+    const a = (aInputs[idx] ? aInputs[idx].value.trim() : '');
+    if (q) newFaqs.push({ q, a });
+  });
+  CURRENT_DATA.faqs = newFaqs;
+
+  persistLiveJson();
+  showToast('About & FAQs saved!');
+}
+
+// ══════════════════════════════════════════════
+// 9. DIRECT JSON EDITOR
+// ══════════════════════════════════════════════
+function reloadJsonToEditor() {
+  if (!CURRENT_DATA) return;
+  document.getElementById('raw-json-textarea').value = JSON.stringify(CURRENT_DATA, null, 2);
+  validateLiveJson();
+}
+
+function validateLiveJson() {
+  const val = document.getElementById('raw-json-textarea').value;
+  const indicator = document.getElementById('json-valid-indicator');
+  const errEl = document.getElementById('json-error-msg');
+  try {
+    JSON.parse(val);
+    indicator.innerHTML = '<i class="fa-solid fa-circle-check"></i> Valid JSON';
+    indicator.style.color = '#86efac';
+    errEl.textContent = '';
+    return true;
+  } catch (err) {
+    indicator.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Syntax Error';
+    indicator.style.color = '#fca5a5';
+    errEl.textContent = err.message;
+    return false;
+  }
+}
+
+function prettifyJsonInEditor() {
+  if (!validateLiveJson()) return;
+  const val = document.getElementById('raw-json-textarea').value;
+  document.getElementById('raw-json-textarea').value = JSON.stringify(JSON.parse(val), null, 2);
+}
+
+function applyJsonFromEditor() {
+  if (!validateLiveJson()) {
+    showToast('Invalid JSON syntax. Please correct errors before applying.', 'error');
+    return;
+  }
+  const val = document.getElementById('raw-json-textarea').value;
+  CURRENT_DATA = JSON.parse(val);
+  persistLiveJson();
+  populateAllViews();
+  showToast('JSON successfully applied to entire site!');
+}
+
+// ══════════════════════════════════════════════
+// 10. GITHUB API DIRECT COMMIT & SYNC
+// ══════════════════════════════════════════════
+async function publishToGitHub() {
+  if (!CURRENT_DATA) return;
+  const repo = document.getElementById('gh-repo').value.trim();
+  const branch = document.getElementById('gh-branch').value.trim() || 'main';
+  const filepath = document.getElementById('gh-filepath').value.trim() || 'data/site-data.json';
+  const token = document.getElementById('gh-token').value.trim();
+  const commitMsg = document.getElementById('gh-commit-msg').value.trim() || 'Update site-data.json';
+  const statusEl = document.getElementById('gh-sync-status');
+  const btn = document.getElementById('btn-gh-commit');
+
+  if (!token) {
+    statusEl.style.display = 'block';
+    statusEl.style.background = '#7f1d1d';
+    statusEl.style.color = '#fecaca';
+    statusEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Please enter a GitHub Personal Access Token (PAT) with <code>repo</code> or <code>Contents: Write</code> permissions.';
+    return;
+  }
+
+  // Save repo & token to localStorage for convenience
+  localStorage.setItem('stenmed_gh_token', token);
+  localStorage.setItem('stenmed_gh_repo', repo);
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Committing to GitHub...';
+  statusEl.style.display = 'block';
+  statusEl.style.background = 'var(--surface2)';
+  statusEl.style.color = 'var(--text)';
+  statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Fetching repository info...';
+
+  try {
+    const jsonString = JSON.stringify(CURRENT_DATA, null, 2);
+    // Base64 encode for UTF-8 in browser
+    const contentBase64 = btoa(unescape(encodeURIComponent(jsonString)));
+
+    // Step 1: Get existing file SHA if exists
+    let sha = null;
+    const getUrl = `https://api.github.com/repos/${repo}/contents/${filepath}?ref=${branch}`;
+    const getResp = await fetch(getUrl, {
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+
+    if (getResp.ok) {
+      const fileData = await getResp.json();
+      sha = fileData.sha;
+    }
+
+    // Step 2: PUT commit
+    const putUrl = `https://api.github.com/repos/${repo}/contents/${filepath}`;
+    const bodyPayload = {
+      message: commitMsg,
+      content: contentBase64,
+      branch: branch
+    };
+    if (sha) bodyPayload.sha = sha;
+
+    const putResp = await fetch(putUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bodyPayload)
+    });
+
+    if (!putResp.ok) {
+      const errData = await putResp.json();
+      throw new Error(errData.message || `GitHub error status ${putResp.status}`);
+    }
+
+    const result = await putResp.json();
+    statusEl.style.background = '#064e3b';
+    statusEl.style.color = '#a7f3d0';
+    statusEl.innerHTML = `
+      <div style="font-weight:700"><i class="fa-solid fa-circle-check"></i> Published Successfully to GitHub!</div>
+      <div style="font-size:.78rem;margin-top:.25rem">
+        Commit: <code>${result.commit.sha.substring(0, 7)}</code> on branch <strong>${branch}</strong>.
+        <a href="${result.commit.html_url}" target="_blank" style="color:#6ee7b7;margin-left:.5rem;text-decoration:underline">View commit on GitHub →</a>
+      </div>`;
+    showToast('Committed & published to GitHub successfully!');
+  } catch (err) {
+    statusEl.style.background = '#7f1d1d';
+    statusEl.style.color = '#fecaca';
+    statusEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <strong>GitHub Sync Failed:</strong> ${err.message}`;
+    showToast('GitHub Sync Failed: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Commit &amp; Publish to GitHub';
+  }
+}
+
+// ══════════════════════════════════════════════
+// 11. DOWNLOAD & COPY JSON
+// ══════════════════════════════════════════════
+function downloadJsonFile() {
+  if (!CURRENT_DATA) return;
+  const jsonStr = JSON.stringify(CURRENT_DATA, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'site-data.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Downloaded site-data.json');
+}
+
+function copyJsonToClipboard() {
+  if (!CURRENT_DATA) return;
+  const jsonStr = JSON.stringify(CURRENT_DATA, null, 2);
+  navigator.clipboard.writeText(jsonStr).then(() => {
+    showToast('JSON copied to clipboard!');
+  }).catch(() => {
+    showToast('Could not copy to clipboard', 'error');
+  });
+}
+
+function importJsonFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      const parsed = JSON.parse(ev.target.result);
+      CURRENT_DATA = parsed;
+      persistLiveJson();
+      populateAllViews();
+      showToast('Imported ' + file.name + ' successfully!');
+    } catch (err) {
+      showToast('Error parsing JSON file: ' + err.message, 'error');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ══════════════════════════════════════════════
+// 12. SETTINGS & PASSWORD
+// ══════════════════════════════════════════════
+function changeAdminPassword() {
+  const cur = document.getElementById('current-pw').value;
+  const nw = document.getElementById('new-pw').value;
+  const conf = document.getElementById('confirm-pw').value;
+  const stored = localStorage.getItem('stenmeds_admin_pw') || 'Sten@dmin2024';
+
+  if (cur !== stored) { showToast('Current password incorrect', 'error'); return; }
+  if (nw.length < 6) { showToast('Password must be at least 6 characters', 'error'); return; }
+  if (nw !== conf) { showToast('New passwords do not match', 'error'); return; }
+
+  localStorage.setItem('stenmeds_admin_pw', nw);
+  showToast('Password updated!');
   document.getElementById('current-pw').value = '';
   document.getElementById('new-pw').value = '';
   document.getElementById('confirm-pw').value = '';
-  hidePwMsg();
 }
 
-function changePassword(){
-  var cur  = document.getElementById('current-pw').value;
-  var nw   = document.getElementById('new-pw').value;
-  var conf = document.getElementById('confirm-pw').value;
-  hidePwMsg();
-
-  if(!cur){showPwMsg('Please enter your current password.','error');return;}
-  if(cur !== getPassword()){showPwMsg('Current password is incorrect.','error');return;}
-  if(nw.length < 6){showPwMsg('New password must be at least 6 characters.','error');return;}
-  if(nw !== conf){showPwMsg('New passwords do not match.','error');return;}
-  if(nw === cur){showPwMsg('New password must be different from current.','error');return;}
-
-  setPassword(nw);
-  showPwMsg('Password changed successfully! Use the new password next time you log in.','success');
-  showToast('Password updated!');
-  document.getElementById('current-pw').value='';
-  document.getElementById('new-pw').value='';
-  document.getElementById('confirm-pw').value='';
-}
-
-function updateSecurityAnswer(){
-  var ans = document.getElementById('sec-answer-setting').value.trim().toLowerCase();
-  if(!ans){showSecMsg('Please enter an answer.','error');return;}
-  setSecAnswer(ans);
-  showSecMsg('Security answer updated!','success');
-  showToast('Security answer saved!');
-}
-
-function showPwMsg(msg,type){
-  var el=document.getElementById('pw-msg');
-  el.textContent=msg; el.className='pw-msg show '+type;
-}
-function hidePwMsg(){document.getElementById('pw-msg').className='pw-msg';}
-function showSecMsg(msg,type){
-  var el=document.getElementById('sec-msg');
-  el.textContent=msg; el.className='pw-msg show '+type;
-  setTimeout(function(){el.className='pw-msg';},3000);
-}
-
-function toggleField(id){
-  var inp=document.getElementById(id);
-  var icon=inp.parentElement.querySelector('.pw-toggle i');
-  if(inp.type==='password'){inp.type='text';icon.className='fa-solid fa-eye-slash';}
-  else{inp.type='password';icon.className='fa-solid fa-eye';}
+async function resetToBaseline() {
+  if (!confirm('Reload default STENMED BIOTECH baseline from data/site-data.json?')) return;
+  localStorage.removeItem('stenmed_live_json');
+  CURRENT_DATA = null;
+  await initAdmin();
+  showToast('Baseline data restored.');
 }
 
 // ══════════════════════════════════════════════
-// RESET ALL DATA
+// 13. TOAST
 // ══════════════════════════════════════════════
-function resetAllData(){document.getElementById('reset-modal').classList.add('show');}
-function doResetAll(){
-  localStorage.removeItem('stenmeds_products');
-  localStorage.removeItem('stenmeds_removed');
-  document.getElementById('reset-modal').classList.remove('show');
-  showToast('All admin data has been reset.');
-  refreshDashboard();
-  renderProductsTable();
-}
-
-// ══════════════════════════════════════════════
-// TOAST
-// ══════════════════════════════════════════════
-function showToast(msg,type){
-  var t=document.getElementById('toast');
-  var ic=t.querySelector('i');
-  t.classList.remove('error');
-  if(type==='error'){t.classList.add('error');ic.className='fa-solid fa-circle-exclamation';}
-  else{ic.className='fa-solid fa-circle-check';}
-  document.getElementById('toast-text').textContent=msg;
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  const ic = t.querySelector('i');
+  t.className = 'toast ' + (type === 'error' ? 'error' : 'success');
+  ic.className = type === 'error' ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-circle-check';
+  document.getElementById('toast-text').textContent = msg;
   t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');},3000);
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// ══════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════
-refreshDashboard();
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', initAdmin);
 </script>
 </body>
 </html>
