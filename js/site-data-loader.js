@@ -23,15 +23,32 @@
   }
 
   async function loadSiteData() {
+    let data = null;
     try {
-      const response = await fetch(getDataPath());
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-      const data = await response.json();
+      const response = await fetch(getDataPath(), { cache: 'no-store' });
+      if (response.ok) {
+        data = await response.json();
+      }
+    } catch (err) {
+      console.warn('[SiteData] Could not load dynamic site-data.json', err);
+    }
+
+    const localCache = localStorage.getItem('stenmed_live_json');
+    if (localCache) {
+      try {
+        const cached = JSON.parse(localCache);
+        if (cached && cached.lastUpdated) {
+          if (!data || (cached.lastUpdated > (data.lastUpdated || ''))) {
+            data = cached;
+          }
+        }
+      } catch (e) {}
+    }
+
+    if (data) {
       window.SITE_DATA = data;
       hydratePage(data);
       window.dispatchEvent(new CustomEvent('siteDataLoaded', { detail: data }));
-    } catch (err) {
-      console.warn('[SiteData] Could not load dynamic site-data.json, keeping default HTML content.', err);
     }
   }
 
