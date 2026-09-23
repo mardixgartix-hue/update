@@ -228,7 +228,7 @@
         <button class="btn btn-whatsapp btn-lg submit-btn" type="submit">
           <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Continue to WhatsApp
         </button>
-        <p class="form-note">WhatsApp will open with your enquiry ready to send.</p>
+        <p class="form-note" id="contact-privacy-note">Your information is used only to respond to your enquiry.</p>
       </form>
     </div>
   </div>
@@ -276,10 +276,30 @@
   const categorySelect = document.getElementById('enquiry-category');
   const medicineSelect = document.getElementById('enquiry-medicine');
 
+  function populateEnquiryOptions(data) {
+    if (!data) return;
+    const categories = data.categories || [];
+    const products = data.products || [];
+    categorySelect.innerHTML = '<option value="">Select a category</option>' + categories.map(category =>
+      `<option value="${category.id}">${category.name}</option>`
+    ).join('');
+    medicineSelect.innerHTML = '<option value="">Select a medicine</option>' + categories.map(category => {
+      const options = products.filter(product => product.category === category.id).map(product =>
+        `<option value="${product.name}">${product.name}</option>`
+      ).join('');
+      return options ? `<optgroup label="${category.name}" data-category="${category.id}">${options}</optgroup>` : '';
+    }).join('');
+    const requestedProduct = new URLSearchParams(window.location.search).get('product');
+    if (requestedProduct) medicineSelect.value = requestedProduct;
+    categorySelect.dispatchEvent(new Event('change'));
+  }
+
+  window.addEventListener('siteDataLoaded', event => populateEnquiryOptions(event.detail));
+
   categorySelect.addEventListener('change', function () {
     medicineSelect.value = '';
     Array.from(medicineSelect.querySelectorAll('optgroup')).forEach(function (group) {
-      group.hidden = group.label !== categorySelect.value;
+      group.hidden = group.dataset.category !== categorySelect.value;
     });
   });
 
@@ -301,7 +321,8 @@
       formData.get('message') ? `Message: ${formData.get('message')}` : ''
     ].filter(Boolean).join('\n');
 
-    window.open(`https://wa.me/917417350021?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    const waNumber = window.SITE_DATA?.company?.whatsappNumber || '917417350021';
+    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
   });
 </script>
 <script src="/js/site-data-loader.js"></script>

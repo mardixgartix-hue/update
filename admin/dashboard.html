@@ -46,8 +46,6 @@
     .sidebar-link .badge-count{margin-left:auto;font-size:.68rem;background:var(--surface3);padding:.15rem .45rem;border-radius:10px;color:var(--text)}
     
     .sidebar-footer{padding:1rem 1.4rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:.5rem}
-    .github-badge{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--text-muted);background:var(--surface2);padding:.5rem .75rem;border-radius:8px;border:1px solid var(--border)}
-    .github-badge i{font-size:1rem;color:#fff}
 
     /* ── MAIN ── */
     .main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh;max-width:calc(100vw - var(--sidebar-w))}
@@ -59,12 +57,6 @@
     .topbar-title{font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:.6rem}
     .topbar-title i{color:var(--accent);font-size:1rem}
     .topbar-actions{display:flex;align-items:center;gap:.8rem}
-    .btn-sync-quick{
-      background:linear-gradient(135deg,#0284c7,#2563eb);color:#fff;
-      font-size:.8rem;font-weight:600;padding:.5rem 1rem;border-radius:8px;border:none;cursor:pointer;
-      display:flex;align-items:center;gap:.5rem;transition:all .2s;
-    }
-    .btn-sync-quick:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(2,132,199,.4)}
     .content{flex:1;padding:1.8rem 2rem}
 
     /* ── STATS CARDS ── */
@@ -125,8 +117,6 @@
     .btn-danger:hover{background:#b91c1c}
     .btn-ghost{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)}
     .btn-ghost:hover{color:var(--text);border-color:var(--accent)}
-    .btn-github{background:#24292e;color:#fff;border:1px solid #444d56}
-    .btn-github:hover{background:#2f363d;border-color:#586069}
     .btn-sm{font-size:.78rem;padding:.45rem .85rem}
     .btn-lg{font-size:.95rem;padding:.8rem 1.8rem}
 
@@ -143,6 +133,10 @@
       font-family:'JetBrains Mono',monospace;font-size:.84rem;line-height:1.5;
       padding:1rem;outline:none;resize:vertical;white-space:pre;tab-size:2;
     }
+    .workflow-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+    .workflow-step{background:var(--surface2);padding:1rem;border-radius:10px;border:1px solid var(--border)}
+    .workflow-step strong{display:block;font-size:.85rem;margin-bottom:.3rem;color:var(--accent)}
+    .workflow-step p{font-size:.78rem;color:var(--text-muted);line-height:1.4}
 
     /* ── TABLES ── */
     .products-table{width:100%;border-collapse:collapse}
@@ -175,16 +169,6 @@
     .toast.show{transform:translateY(0);opacity:1}
     .toast.success{border-color:var(--success);background:#064e3b}
     .toast.error{border-color:var(--danger);background:#7f1d1d}
-
-    /* ── GITHUB SYNC BOX ── */
-    .sync-card{
-      background:linear-gradient(135deg,#131f37,#0f172a);border:1px solid rgba(14,165,233,.25);
-      border-radius:var(--radius);padding:1.6rem;margin-bottom:1.5rem;
-    }
-    .sync-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1.2rem 0}
-    .sync-step{background:var(--surface2);padding:1rem;border-radius:10px;border:1px solid var(--border)}
-    .sync-step strong{display:block;font-size:.85rem;margin-bottom:.3rem;color:var(--accent)}
-    .sync-step p{font-size:.78rem;color:var(--text-muted);line-height:1.4}
 
     /* ── MODALS ── */
     .modal-overlay{
@@ -232,8 +216,7 @@
     <a class="sidebar-link" data-view="hero"><i class="fa-solid fa-sliders"></i> Hero &amp; Banners</a>
     <a class="sidebar-link" data-view="about-content"><i class="fa-solid fa-circle-info"></i> About &amp; FAQs</a>
 
-    <div class="nav-group-label">Data &amp; Sync</div>
-    <a class="sidebar-link" data-view="github-sync"><i class="fa-brands fa-github"></i> GitHub Sync Hub</a>
+    <div class="nav-group-label">Data Tools</div>
     <a class="sidebar-link" data-view="json-editor"><i class="fa-solid fa-code"></i> Direct JSON Editor</a>
     <a class="sidebar-link" data-view="settings"><i class="fa-solid fa-gear"></i> Settings &amp; Security</a>
 
@@ -241,13 +224,6 @@
     <a class="sidebar-link" href="/index.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Website</a>
   </nav>
   <div class="sidebar-footer">
-    <div class="github-badge">
-      <i class="fa-brands fa-github"></i>
-      <div>
-        <div style="font-weight:600;color:#fff">Repo: update</div>
-        <div style="font-size:.65rem">branch: main</div>
-      </div>
-    </div>
     <button class="btn btn-ghost btn-sm" onclick="doLogout()" style="width:100%"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
   </div>
 </aside>
@@ -262,7 +238,6 @@
     </div>
     <div class="topbar-actions">
       <button class="btn btn-ghost btn-sm" onclick="downloadJsonFile()"><i class="fa-solid fa-download"></i> Download JSON</button>
-      <button class="btn-sync-quick" onclick="switchView('github-sync')"><i class="fa-brands fa-github"></i> GitHub Publish</button>
     </div>
   </div>
 
@@ -292,20 +267,49 @@
       </div>
 
       <!-- Quick Action Cards -->
-      <div class="sync-card">
+      <div class="panel">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
           <div>
             <h3 style="font-size:1.1rem;display:flex;align-items:center;gap:.5rem;margin-bottom:.3rem">
-              <i class="fa-brands fa-github" style="color:var(--accent)"></i> GitHub Centralized JSON Data Engine
+              <i class="fa-solid fa-database" style="color:var(--accent)"></i> Centralized JSON Data Engine
             </h3>
             <p style="font-size:.82rem;color:var(--text-muted)">
-              All details across the entire website are loaded from <code>data/site-data.json</code>. You can edit visually below, download the JSON, or publish directly via GitHub API.
+              All details across the entire website are loaded from <code>site-data.json</code>. Edit visually below, then download or copy the updated JSON for deployment through your approved Git workflow.
             </p>
           </div>
           <div style="display:flex;gap:.6rem;flex-wrap:wrap">
             <button class="btn btn-ghost btn-sm" onclick="copyJsonToClipboard()"><i class="fa-solid fa-copy"></i> Copy JSON</button>
-            <button class="btn btn-primary btn-sm" onclick="switchView('github-sync')"><i class="fa-solid fa-cloud-arrow-up"></i> Publish to GitHub</button>
           </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title"><i class="fa-solid fa-cloud-arrow-up"></i> GitHub Deployment Workflow</div>
+            <div class="panel-desc">Use this process to publish content and image changes safely.</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="workflow-steps">
+            <div class="workflow-step">
+              <strong>1. Add image files</strong>
+              <p>Upload product images to <code>assets/images/products/</code> or hero images to <code>assets/images/hero/</code> in GitHub.</p>
+            </div>
+            <div class="workflow-step">
+              <strong>2. Set the image path</strong>
+              <p>In the product or hero editor, use the matching public path, such as <code>/assets/images/products/new-product.jpg</code>.</p>
+            </div>
+            <div class="workflow-step">
+              <strong>3. Download the JSON</strong>
+              <p>Open Direct JSON Editor, apply your changes, then use <strong>Download JSON</strong> to download the updated <code>site-data.json</code>.</p>
+            </div>
+            <div class="workflow-step">
+              <strong>4. Commit both files</strong>
+              <p>Replace the root <code>site-data.json</code> in GitHub and commit it together with the image files. The deployed site then loads both automatically.</p>
+            </div>
+          </div>
+          <p style="font-size:.78rem;color:var(--text-muted);margin-top:.8rem"><i class="fa-solid fa-circle-info" style="color:var(--accent)"></i> This admin page prepares and downloads the files. It does not upload or push files to GitHub.</p>
         </div>
       </div>
 
@@ -474,6 +478,14 @@
             <label>Our Vision</label>
             <textarea id="about-vision" rows="2"></textarea>
           </div>
+          <div class="form-group">
+            <label>About Subheadline</label>
+            <textarea id="about-subheadline" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label>About Story</label>
+            <textarea id="about-story" rows="3"></textarea>
+          </div>
 
           <hr style="border:none;border-top:1px solid var(--border);margin:1.8rem 0"/>
 
@@ -489,89 +501,14 @@
     </div>
 
     <!-- =========================================================
-         6. VIEW: GITHUB SYNC HUB
-         ========================================================= -->
-    <div id="view-github-sync" style="display:none">
-      <div class="panel">
-        <div class="panel-header">
-          <div>
-            <div class="panel-title"><i class="fa-brands fa-github"></i> GitHub Sync &amp; Deployment Hub</div>
-            <div class="panel-desc">Publish your updated <code>data/site-data.json</code> directly to your GitHub repository to update the live website.</div>
-          </div>
-        </div>
-        <div class="panel-body">
-          <div class="sync-steps">
-            <div class="sync-step">
-              <strong>Method 1: Direct 1-Click Commit (Recommended)</strong>
-              <p>Enter your GitHub Personal Access Token once. You can then commit &amp; push your latest site changes directly to GitHub with a single click!</p>
-            </div>
-            <div class="sync-step">
-              <strong>Method 2: Download &amp; Upload</strong>
-              <p>Download the generated <code>site-data.json</code> and upload/replace it in the <code>/data/</code> folder on github.com.</p>
-            </div>
-            <div class="sync-step">
-              <strong>Method 3: Copy to Clipboard</strong>
-              <p>Copy the whole JSON and paste it inside GitHub's web file editor.</p>
-            </div>
-          </div>
-
-          <div class="sync-card">
-            <h4 style="font-size:.95rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem">
-              <i class="fa-solid fa-rocket" style="color:var(--accent)"></i> Publish Directly via GitHub API
-            </h4>
-            <div class="form-grid-3" style="margin-top:1rem">
-              <div class="form-group">
-                <label>GitHub Repository</label>
-                <input type="text" id="gh-repo" value="mardixgartix-hue/update" placeholder="owner/repo"/>
-              </div>
-              <div class="form-group">
-                <label>Branch</label>
-                <input type="text" id="gh-branch" value="main" placeholder="main"/>
-              </div>
-              <div class="form-group">
-                <label>File Path in Repo</label>
-                <input type="text" id="gh-filepath" value="data/site-data.json" placeholder="data/site-data.json"/>
-              </div>
-            </div>
-            <div class="form-group full">
-              <label>GitHub Personal Access Token (PAT)</label>
-              <div style="position:relative">
-                <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx or github_pat_xxxxxxxxxxxx"/>
-              </div>
-              <span class="input-hint"><i class="fa-solid fa-lock"></i> Stored locally in your browser's private storage only. Required scope: <code>repo</code> or <code>Contents: Write</code>.</span>
-            </div>
-            <div class="form-group full">
-              <label>Commit Message</label>
-              <input type="text" id="gh-commit-msg" value="Update site-data.json from Admin Portal" placeholder="Commit message..."/>
-            </div>
-
-            <div id="gh-sync-status" style="display:none;margin:1rem 0;padding:.8rem 1rem;border-radius:8px;font-size:.84rem"></div>
-
-            <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:1rem">
-              <button class="btn btn-primary btn-lg" id="btn-gh-commit" onclick="publishToGitHub()"><i class="fa-solid fa-cloud-arrow-up"></i> Commit &amp; Publish to GitHub</button>
-              <button class="btn btn-ghost" onclick="downloadJsonFile()"><i class="fa-solid fa-download"></i> Download site-data.json</button>
-              <button class="btn btn-ghost" onclick="copyJsonToClipboard()"><i class="fa-solid fa-copy"></i> Copy JSON</button>
-            </div>
-          </div>
-
-          <div style="margin-top:1.5rem">
-            <h4 style="font-size:.9rem;margin-bottom:.5rem"><i class="fa-solid fa-upload"></i> Import / Restore JSON File</h4>
-            <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:.8rem">Upload an existing <code>site-data.json</code> file to import data into the dashboard.</p>
-            <input type="file" id="json-file-input" accept=".json" onchange="importJsonFile(event)" style="font-size:.85rem"/>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- =========================================================
-         7. VIEW: DIRECT JSON EDITOR
+         6. VIEW: DIRECT JSON EDITOR
          ========================================================= -->
     <div id="view-json-editor" style="display:none">
       <div class="panel">
         <div class="panel-header">
           <div>
             <div class="panel-title"><i class="fa-solid fa-code"></i> Direct Raw JSON Editor</div>
-            <div class="panel-desc">View and edit the underlying <code>data/site-data.json</code> structure directly with live syntax validation.</div>
+            <div class="panel-desc">View and edit the underlying <code>site-data.json</code> structure directly with live syntax validation.</div>
           </div>
           <div style="display:flex;gap:.5rem">
             <button class="btn btn-ghost btn-sm" onclick="prettifyJsonInEditor()"><i class="fa-solid fa-wand-magic-sparkles"></i> Prettify JSON</button>
@@ -579,9 +516,16 @@
           </div>
         </div>
         <div class="panel-body">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;padding:.8rem 1rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px">
+            <div>
+              <strong style="font-size:.85rem">Import / Restore JSON File</strong>
+              <p style="font-size:.75rem;color:var(--text-muted);margin-top:.25rem">Load an existing <code>site-data.json</code> file into the dashboard.</p>
+            </div>
+            <input type="file" id="json-file-input" accept=".json" onchange="importJsonFile(event)" style="font-size:.8rem;max-width:240px"/>
+          </div>
           <div class="json-editor-container">
             <div class="json-editor-toolbar">
-              <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent)">data/site-data.json</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent)">site-data.json</span>
               <span id="json-valid-indicator" style="font-size:.75rem;color:#86efac"><i class="fa-solid fa-circle-check"></i> Valid JSON</span>
             </div>
             <textarea id="raw-json-textarea" class="json-textarea" spellcheck="false" oninput="validateLiveJson()"></textarea>
@@ -627,9 +571,9 @@
               <button class="btn btn-primary btn-sm" onclick="changeAdminPassword()"><i class="fa-solid fa-key"></i> Update Password</button>
             </div>
             <div class="sync-step">
-              <strong>Reset &amp; Restore Baseline</strong>
-              <p style="margin-bottom:.8rem">Reload the default STENMED BIOTECH JSON baseline data.</p>
-              <button class="btn btn-danger btn-sm" onclick="resetToBaseline()"><i class="fa-solid fa-rotate-left"></i> Reload Baseline Data</button>
+              <strong>Reset All Content Changes</strong>
+              <p style="margin-bottom:.8rem">Discard every locally saved site-data change and reload all default values from the root <code>site-data.json</code>. Your admin password will not be changed.</p>
+              <button class="btn btn-danger btn-sm" onclick="resetToBaseline()"><i class="fa-solid fa-rotate-left"></i> Reset All Content</button>
             </div>
           </div>
         </div>
@@ -728,13 +672,7 @@ function doLogout() {
 let CURRENT_DATA = null;
 
 async function initAdmin() {
-  // Load saved GitHub token & preferences
-  const savedToken = localStorage.getItem('stenmed_gh_token');
-  if (savedToken) document.getElementById('gh-token').value = savedToken;
-  const savedRepo = localStorage.getItem('stenmed_gh_repo');
-  if (savedRepo) document.getElementById('gh-repo').value = savedRepo;
-
-  // Try loading local cached state first or fetch data/site-data.json
+  // Try loading local cached state first or fetch site-data.json
   const localCache = localStorage.getItem('stenmed_live_json');
   if (localCache) {
     try {
@@ -744,14 +682,14 @@ async function initAdmin() {
 
   if (!CURRENT_DATA) {
     try {
-      const resp = await fetch('/data/site-data.json?v=' + Date.now());
+      const resp = await fetch('/site-data.json?v=' + Date.now(), { cache: 'no-store' });
       if (resp.ok) {
         CURRENT_DATA = await resp.json();
       }
     } catch (e) {
-      console.warn('Could not fetch /data/site-data.json, trying relative path', e);
+      console.warn('Could not fetch /site-data.json, trying relative path', e);
       try {
-        const resp2 = await fetch('../data/site-data.json?v=' + Date.now());
+        const resp2 = await fetch('../site-data.json?v=' + Date.now(), { cache: 'no-store' });
         if (resp2.ok) CURRENT_DATA = await resp2.json();
       } catch(e2){}
     }
@@ -771,14 +709,13 @@ function persistLiveJson() {
 // ══════════════════════════════════════════════
 // 3. VIEW SWITCHING
 // ══════════════════════════════════════════════
-const views = ['dashboard', 'company', 'products', 'hero', 'about-content', 'github-sync', 'json-editor', 'settings'];
+const views = ['dashboard', 'company', 'products', 'hero', 'about-content', 'json-editor', 'settings'];
 const viewMeta = {
   'dashboard': { title: 'Dashboard', icon: 'fa-gauge-high' },
   'company': { title: 'Company & Contact Details', icon: 'fa-building' },
   'products': { title: 'Product Catalog Manager', icon: 'fa-pills' },
   'hero': { title: 'Hero & Banners', icon: 'fa-sliders' },
   'about-content': { title: 'About Story & FAQs', icon: 'fa-circle-info' },
-  'github-sync': { title: 'GitHub Sync & Export Hub', icon: 'fa-brands fa-github' },
   'json-editor': { title: 'Direct JSON Editor', icon: 'fa-code' },
   'settings': { title: 'Admin Settings', icon: 'fa-gear' }
 };
@@ -834,6 +771,20 @@ function populateAllViews() {
     document.getElementById('comp-gstin').value = c.gstin || '';
   }
 
+  const categoryFilter = document.getElementById('prod-cat-filter');
+  const productCategory = document.getElementById('modal-prod-category');
+  const categoryOptions = (d.categories || []).map(category => `<option value="${category.id}">${category.name}</option>`).join('');
+  if (categoryFilter) {
+    const currentFilter = categoryFilter.value;
+    categoryFilter.innerHTML = '<option value="">All Categories</option>' + categoryOptions;
+    categoryFilter.value = currentFilter;
+  }
+  if (productCategory) {
+    const currentCategory = productCategory.value;
+    productCategory.innerHTML = categoryOptions;
+    productCategory.value = currentCategory || (d.categories?.[0]?.id || '');
+  }
+
   // 3. Products
   renderProductsList();
   renderDashboardProductsTable();
@@ -846,6 +797,8 @@ function populateAllViews() {
     document.getElementById('about-headline').value = d.about.headline || '';
     document.getElementById('about-mission').value = d.about.mission || '';
     document.getElementById('about-vision').value = d.about.vision || '';
+    document.getElementById('about-subheadline').value = d.about.subheadline || '';
+    document.getElementById('about-story').value = d.about.story || '';
   }
   renderFaqsList();
 
@@ -1050,6 +1003,10 @@ function renderHeroSlidesForm() {
           <label>Subtitle / Description</label>
           <textarea class="hero-sub-input" data-idx="${idx}" rows="2">${slide.subtitle || ''}</textarea>
         </div>
+        <div class="form-group">
+          <label>Background Image Path</label>
+          <input type="text" class="hero-image-input" data-idx="${idx}" value="${slide.image || ''}" placeholder="/assets/images/hero/hero-01.jpg"/>
+        </div>
         <div class="form-grid-2">
           <div class="form-group">
             <label>Primary Button Text</label>
@@ -1058,6 +1015,16 @@ function renderHeroSlidesForm() {
           <div class="form-group">
             <label>Primary Button Link</label>
             <input type="text" class="hero-plink-input" data-idx="${idx}" value="${slide.primaryBtnLink || ''}"/>
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Secondary Button Text</label>
+            <input type="text" class="hero-sbtn-input" data-idx="${idx}" value="${slide.secondaryBtnText || ''}"/>
+          </div>
+          <div class="form-group">
+            <label>Secondary Button Link</label>
+            <input type="text" class="hero-slink-input" data-idx="${idx}" value="${slide.secondaryBtnLink || ''}"/>
           </div>
         </div>
       </div>`;
@@ -1096,6 +1063,18 @@ function saveHeroSlides() {
     if (CURRENT_DATA.heroSlides[idx]) {
       CURRENT_DATA.heroSlides[idx].primaryBtnLink = inp.value.trim();
     }
+  });
+  document.querySelectorAll('.hero-image-input').forEach(inp => {
+    const idx = parseInt(inp.dataset.idx, 10);
+    if (CURRENT_DATA.heroSlides[idx]) CURRENT_DATA.heroSlides[idx].image = inp.value.trim();
+  });
+  document.querySelectorAll('.hero-sbtn-input').forEach(inp => {
+    const idx = parseInt(inp.dataset.idx, 10);
+    if (CURRENT_DATA.heroSlides[idx]) CURRENT_DATA.heroSlides[idx].secondaryBtnText = inp.value.trim();
+  });
+  document.querySelectorAll('.hero-slink-input').forEach(inp => {
+    const idx = parseInt(inp.dataset.idx, 10);
+    if (CURRENT_DATA.heroSlides[idx]) CURRENT_DATA.heroSlides[idx].secondaryBtnLink = inp.value.trim();
   });
 
   persistLiveJson();
@@ -1144,6 +1123,8 @@ function saveAboutFaqs() {
   CURRENT_DATA.about.headline = document.getElementById('about-headline').value.trim();
   CURRENT_DATA.about.mission = document.getElementById('about-mission').value.trim();
   CURRENT_DATA.about.vision = document.getElementById('about-vision').value.trim();
+  CURRENT_DATA.about.subheadline = document.getElementById('about-subheadline').value.trim();
+  CURRENT_DATA.about.story = document.getElementById('about-story').value.trim();
 
   // Save FAQs
   const qInputs = document.querySelectorAll('.faq-q-input');
@@ -1174,7 +1155,9 @@ function validateLiveJson() {
   const indicator = document.getElementById('json-valid-indicator');
   const errEl = document.getElementById('json-error-msg');
   try {
-    JSON.parse(val);
+    const data = JSON.parse(val);
+    const errors = validateSiteData(data);
+    if (errors.length) throw new Error(errors.join(' '));
     indicator.innerHTML = '<i class="fa-solid fa-circle-check"></i> Valid JSON';
     indicator.style.color = '#86efac';
     errEl.textContent = '';
@@ -1185,6 +1168,23 @@ function validateLiveJson() {
     errEl.textContent = err.message;
     return false;
   }
+}
+
+function validateSiteData(data) {
+  const errors = [];
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return ['Root must be a JSON object.'];
+  ['company', 'categories', 'products', 'heroSlides', 'about', 'faqs'].forEach(key => {
+    if (!(key in data)) errors.push(`Missing required section: ${key}.`);
+  });
+  if (!data.company?.name || !data.company?.email) errors.push('Company name and email are required.');
+  const categoryIds = new Set((data.categories || []).map(category => category.id));
+  const productIds = new Set();
+  (data.products || []).forEach(product => {
+    if (!product.id || productIds.has(product.id)) errors.push(`Duplicate or missing product id: ${product.name || 'unknown'}.`);
+    productIds.add(product.id);
+    if (product.category && !categoryIds.has(product.category)) errors.push(`Unknown product category: ${product.category}.`);
+  });
+  return errors;
 }
 
 function prettifyJsonInEditor() {
@@ -1206,104 +1206,7 @@ function applyJsonFromEditor() {
 }
 
 // ══════════════════════════════════════════════
-// 10. GITHUB API DIRECT COMMIT & SYNC
-// ══════════════════════════════════════════════
-async function publishToGitHub() {
-  if (!CURRENT_DATA) return;
-  const repo = document.getElementById('gh-repo').value.trim();
-  const branch = document.getElementById('gh-branch').value.trim() || 'main';
-  const filepath = document.getElementById('gh-filepath').value.trim() || 'data/site-data.json';
-  const token = document.getElementById('gh-token').value.trim();
-  const commitMsg = document.getElementById('gh-commit-msg').value.trim() || 'Update site-data.json';
-  const statusEl = document.getElementById('gh-sync-status');
-  const btn = document.getElementById('btn-gh-commit');
-
-  if (!token) {
-    statusEl.style.display = 'block';
-    statusEl.style.background = '#7f1d1d';
-    statusEl.style.color = '#fecaca';
-    statusEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Please enter a GitHub Personal Access Token (PAT) with <code>repo</code> or <code>Contents: Write</code> permissions.';
-    return;
-  }
-
-  // Save repo & token to localStorage for convenience
-  localStorage.setItem('stenmed_gh_token', token);
-  localStorage.setItem('stenmed_gh_repo', repo);
-
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Committing to GitHub...';
-  statusEl.style.display = 'block';
-  statusEl.style.background = 'var(--surface2)';
-  statusEl.style.color = 'var(--text)';
-  statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Fetching repository info...';
-
-  try {
-    const jsonString = JSON.stringify(CURRENT_DATA, null, 2);
-    // Base64 encode for UTF-8 in browser
-    const contentBase64 = btoa(unescape(encodeURIComponent(jsonString)));
-
-    // Step 1: Get existing file SHA if exists
-    let sha = null;
-    const getUrl = `https://api.github.com/repos/${repo}/contents/${filepath}?ref=${branch}`;
-    const getResp = await fetch(getUrl, {
-      headers: {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    });
-
-    if (getResp.ok) {
-      const fileData = await getResp.json();
-      sha = fileData.sha;
-    }
-
-    // Step 2: PUT commit
-    const putUrl = `https://api.github.com/repos/${repo}/contents/${filepath}`;
-    const bodyPayload = {
-      message: commitMsg,
-      content: contentBase64,
-      branch: branch
-    };
-    if (sha) bodyPayload.sha = sha;
-
-    const putResp = await fetch(putUrl, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bodyPayload)
-    });
-
-    if (!putResp.ok) {
-      const errData = await putResp.json();
-      throw new Error(errData.message || `GitHub error status ${putResp.status}`);
-    }
-
-    const result = await putResp.json();
-    statusEl.style.background = '#064e3b';
-    statusEl.style.color = '#a7f3d0';
-    statusEl.innerHTML = `
-      <div style="font-weight:700"><i class="fa-solid fa-circle-check"></i> Published Successfully to GitHub!</div>
-      <div style="font-size:.78rem;margin-top:.25rem">
-        Commit: <code>${result.commit.sha.substring(0, 7)}</code> on branch <strong>${branch}</strong>.
-        <a href="${result.commit.html_url}" target="_blank" style="color:#6ee7b7;margin-left:.5rem;text-decoration:underline">View commit on GitHub →</a>
-      </div>`;
-    showToast('Committed & published to GitHub successfully!');
-  } catch (err) {
-    statusEl.style.background = '#7f1d1d';
-    statusEl.style.color = '#fecaca';
-    statusEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <strong>GitHub Sync Failed:</strong> ${err.message}`;
-    showToast('GitHub Sync Failed: ' + err.message, 'error');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Commit &amp; Publish to GitHub';
-  }
-}
-
-// ══════════════════════════════════════════════
-// 11. DOWNLOAD & COPY JSON
+// 10. DOWNLOAD & COPY JSON
 // ══════════════════════════════════════════════
 function downloadJsonFile() {
   if (!CURRENT_DATA) return;
@@ -1337,6 +1240,8 @@ function importJsonFile(e) {
   reader.onload = function(ev) {
     try {
       const parsed = JSON.parse(ev.target.result);
+      const errors = validateSiteData(parsed);
+      if (errors.length) throw new Error(errors.join(' '));
       CURRENT_DATA = parsed;
       persistLiveJson();
       populateAllViews();
@@ -1369,11 +1274,15 @@ function changeAdminPassword() {
 }
 
 async function resetToBaseline() {
-  if (!confirm('Reload default STENMED BIOTECH baseline from data/site-data.json?')) return;
+  if (!confirm('Reset all locally saved content changes and reload every default value from site-data.json? Your admin password will stay unchanged.')) return;
   localStorage.removeItem('stenmed_live_json');
   CURRENT_DATA = null;
   await initAdmin();
-  showToast('Baseline data restored.');
+  if (CURRENT_DATA) {
+    showToast('All content reset to the site-data.json defaults.');
+  } else {
+    showToast('Could not reload site-data.json defaults.', 'error');
+  }
 }
 
 // ══════════════════════════════════════════════

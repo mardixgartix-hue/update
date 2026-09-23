@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STENMED BIOTECH site data",
+  "type": "object",
+  "required": ["version", "company", "categories", "products", "heroSlides", "about", "faqs"],
+  "properties": {
+    "version": { "type": "string" },
+    "lastUpdated": { "type": "string" },
+    "company": {
+      "type": "object",
+      "required": ["name", "phone", "email", "whatsappNumber"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "phone": { "type": "string" },
+        "phoneRaw": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "whatsappNumber": { "type": "string", "pattern": "^[0-9]+$" },
+        "address": { "type": "string" },
+        "social": { "type": "object", "additionalProperties": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "slug", "page"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "detailSlug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "page": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": true
+      }
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "category"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "minLength": 1 },
+          "image": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "heroSlides": { "type": "array", "items": { "type": "object" } },
+    "stats": { "type": "array", "items": { "type": "object" } },
+    "about": { "type": "object" },
+    "faqs": { "type": "array", "items": { "type": "object", "required": ["q", "a"] } },
+    "seo": { "type": "object" },
+    "forms": { "type": "object" },
+    "assets": { "type": "object" }
+  },
+  "additionalProperties": true
+}

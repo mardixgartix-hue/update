@@ -1,7 +1,44 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "version": "1.0.0",
-  "lastUpdated": "2026-09-23T01:30:00.000Z",
+  "lastUpdated": "2026-09-23T11:37:18.293Z",
+  "seo": {
+    "siteUrl": "https://www.stenmedbiotech.com",
+    "defaultTitle": "STENMED BIOTECH | Trusted Pharmaceutical Distribution",
+    "defaultDescription": "STENMED BIOTECH supplies genuine pharmaceutical formulations to hospitals, clinics, pharmacies, and healthcare providers.",
+    "pages": {
+      "index.html": {
+        "title": "STENMED BIOTECH | Trusted Pharmaceutical Distribution",
+        "description": "Discover trusted pharmaceutical formulations and dependable distribution from STENMED BIOTECH."
+      },
+      "about.html": {
+        "title": "About STENMED BIOTECH | Healthcare Distribution",
+        "description": "Learn about STENMED BIOTECH's mission, vision, and commitment to clinical excellence."
+      },
+      "products.html": {
+        "title": "Pharmaceutical Products | STENMED BIOTECH",
+        "description": "Browse STENMED BIOTECH pharmaceutical categories and product formulations."
+      },
+      "contact.html": {
+        "title": "Contact STENMED BIOTECH",
+        "description": "Contact STENMED BIOTECH for product enquiries, bulk orders, and partnerships."
+      }
+    }
+  },
+  "forms": {
+    "whatsappEnquiry": {
+      "recipient": "company.whatsappNumber",
+      "privacyNote": "Your information is used only to respond to your enquiry."
+    },
+    "newsletter": {
+      "enabled": false
+    }
+  },
+  "assets": {
+    "logo": "/assets/images/logo.png",
+    "heroDirectory": "/assets/images/hero/",
+    "productDirectory": "/assets/images/products/"
+  },
   "company": {
     "name": "STENMED BIOTECH",
     "shortName": "STENMED",
@@ -410,6 +447,21 @@
       "image": "/assets/images/products/my-protine.jpg",
       "featured": false,
       "inStock": true
+    },
+    {
+      "id": "prod-gluconorm-m-500",
+      "name": "GlucoNorm-M 500",
+      "detailSlug": "gluconorm-m-500",
+      "category": "physician",
+      "composition": "Metformin Hydrochloride 500mg Film-Coated Tablets",
+      "use": "Type 2 diabetes management",
+      "form": "Oral Tablet",
+      "packaging": "10 x 10 Blister Pack",
+      "mrp": "",
+      "description": "GlucoNorm-M 500 is an oral antihyperglycemic medication for the management of Type 2 Diabetes Mellitus.",
+      "image": "",
+      "featured": false,
+      "inStock": true
     }
   ],
   "whyChooseUs": [
@@ -434,6 +486,130 @@
       "desc": "Providing superior quality medications at transparent, accessible, and highly competitive pricing tiers."
     }
   ],
+  "wellnessTips": [
+    {
+      "icon": "fa-droplet",
+      "label": "Stay Hydrated"
+    },
+    {
+      "icon": "fa-apple-whole",
+      "label": "Balanced Diet"
+    },
+    {
+      "icon": "fa-person-running",
+      "label": "Regular Exercise"
+    },
+    {
+      "icon": "fa-bed",
+      "label": "Adequate Sleep"
+    },
+    {
+      "icon": "fa-spa",
+      "label": "Manage Stress"
+    },
+    {
+      "icon": "fa-stethoscope",
+      "label": "Regular Check-ups"
+    },
+    {
+      "icon": "fa-hand-sparkles",
+      "label": "Good Hygiene"
+    },
+    {
+      "icon": "fa-face-smile-beam",
+      "label": "Stay Positive"
+    }
+  ],
+  "brands": [
+    {
+      "name": "AstraMed",
+      "icon": "fa-capsules",
+      "color": "var(--color-primary)"
+    },
+    {
+      "name": "BioPharmex",
+      "icon": "fa-vial-circle-check",
+      "color": "var(--color-secondary)"
+    },
+    {
+      "name": "CuraMed Generics",
+      "icon": "fa-tablets",
+      "color": "#6366f1"
+    },
+    {
+      "name": "HelioHealth",
+      "icon": "fa-star",
+      "color": "#f59e0b"
+    },
+    {
+      "name": "NovaCure Labs",
+      "icon": "fa-shield-halved",
+      "color": "#10b981"
+    },
+    {
+      "name": "PharmaGen India",
+      "icon": "fa-flask",
+      "color": "#ef4444"
+    },
+    {
+      "name": "VitalRx",
+      "icon": "fa-heart",
+      "color": "#8b5cf6"
+    },
+    {
+      "name": "GlobalPharma",
+      "icon": "fa-earth-asia",
+      "color": "var(--color-primary)"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Dr. Rajesh Kumar",
+      "title": "Chief Physician, Sunrise Hospital, Bangalore",
+      "quote": "STENMED BIOTECH has been our primary supplier for over 8 years. Their delivery is always on time and the quality is impeccable. I trust them completely for my diabetes care patients.",
+      "avatar": "DR"
+    },
+    {
+      "name": "Dr. Sunita Patel",
+      "title": "Cardiologist, HeartCare Clinic, Pune",
+      "quote": "What sets STENMED BIOTECH apart is their cold chain logistics. Our cardiac medications always arrive in perfect condition. Highly recommend to any healthcare facility.",
+      "avatar": "SP"
+    },
+    {
+      "name": "Anand Mehta",
+      "title": "Pharmacy Manager, MedPlus Wellness, Chennai",
+      "quote": "The competitive pricing and the breadth of their catalog is unmatched. We've reduced our medicine procurement costs by 18% since partnering with STENMED BIOTECH.",
+      "avatar": "AM"
+    },
+    {
+      "name": "Dr. Neha Gupta",
+      "title": "Medical Officer, Rural Primary Health Centre",
+      "quote": "As a rural primary health centre, reliable supply was always our biggest challenge. STENMED BIOTECH solved that completely and keeps our essential medicines stocked.",
+      "avatar": "NG"
+    },
+    {
+      "name": "Vikram Bansal",
+      "title": "Hospital Procurement Director, Delhi",
+      "quote": "I've worked with several pharmaceutical distributors over 20 years. STENMED BIOTECH is the only one I'd trust implicitly for authenticity. Their batch verification process is the most rigorous I've seen.",
+      "avatar": "VB"
+    },
+    {
+      "name": "Dr. Ritu Malhotra",
+      "title": "Hospital Administrator, Lucknow",
+      "quote": "The dedicated account manager assigned to our hospital is a game-changer. They know our requirements and proactively manage our stock instead of leaving us to chase every order.",
+      "avatar": "RM"
+    }
+  ],
+  "cta": {
+    "eyebrow": "Ready to Partner?",
+    "title": "Get a Personalised Quote Today",
+    "description": "Whether you're a hospital, clinic, or pharmacy — we'll craft a supply plan that fits your needs and budget. No commitment required.",
+    "primaryBtnText": "Request a Quote",
+    "primaryBtnLink": "/contact.html",
+    "secondaryBtnText": "Call Us Now",
+    "secondaryBtnLink": "tel:+917417350021"
+  },
+  "privacyNote": "Your information is used only to respond to your enquiry.",
   "about": {
     "headline": "Committed to Clinical Excellence & Healthcare Trust",
     "subheadline": "STENMED BIOTECH operates at the forefront of pharmaceutical distribution and marketing.",

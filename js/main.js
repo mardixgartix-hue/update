@@ -318,11 +318,10 @@ function initLiveSearch() {
   // Product overview page
   const overviewSearch = $('#products-overview-search');
   if (overviewSearch) {
-    const cards = $$('.category-card[data-name]');
     overviewSearch.addEventListener('input', () => {
       const q = overviewSearch.value.trim().toLowerCase();
       let visible = 0;
-      cards.forEach(card => {
+      $$('.category-card[data-name]').forEach(card => {
         const name = card.dataset.name.toLowerCase();
         const match = !q || name.includes(q);
         card.style.display = match ? '' : 'none';
@@ -335,11 +334,10 @@ function initLiveSearch() {
   const catSearch = $('#category-search');
   const countEl   = $('#products-count');
   if (catSearch) {
-    const productCards = $$('.product-card[data-name]');
     catSearch.addEventListener('input', () => {
       const q = catSearch.value.trim().toLowerCase();
       let visible = 0;
-      productCards.forEach(card => {
+      $$('.product-card[data-name]').forEach(card => {
         const name = card.dataset.name.toLowerCase();
         const match = !q || name.includes(q);
         card.style.display = match ? '' : 'none';
@@ -607,4 +605,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initEnquireBtn();
   initLoadMore();
   initActiveNav();
+});
+
+window.addEventListener('siteDataLoaded', () => {
+  initLiveSearch();
 });
