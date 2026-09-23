@@ -656,6 +656,19 @@
 
 <script>
 // ══════════════════════════════════════════════
+// 0. UTILITY FUNCTIONS
+// ══════════════════════════════════════════════
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  }[char]));
+}
+
+// ══════════════════════════════════════════════
 // 1. AUTH GUARD
 // ══════════════════════════════════════════════
 if (sessionStorage.getItem('stenmeds_admin') !== '1') {
@@ -873,22 +886,29 @@ function buildProductTableHtml(products, showActions) {
 
   products.forEach(p => {
     const badgeCls = CAT_BADGES[p.category] || 'badge-blue';
-    const imgHtml = p.image ? `<img src="${p.image}" class="product-thumb" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="product-thumb-placeholder" style="display:none"><i class="fa-solid fa-pills"></i></div>` : `<div class="product-thumb-placeholder"><i class="fa-solid fa-pills"></i></div>`;
+    const safeName = escapeHtml(p.name);
+    const safeComp = escapeHtml(p.composition);
+    const safeForm = escapeHtml(p.form || '--');
+    const safePkg = escapeHtml(p.packaging || '--');
+    const safeCat = escapeHtml(p.category || '');
+    const safeId = escapeHtml(p.id);
+
+    const imgHtml = p.image ? `<img src="${escapeHtml(p.image)}" class="product-thumb" alt="${safeName}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="product-thumb-placeholder" style="display:none"><i class="fa-solid fa-pills"></i></div>` : `<div class="product-thumb-placeholder"><i class="fa-solid fa-pills"></i></div>`;
 
     html += `<tr>
       <td>${imgHtml}</td>
       <td>
-        <strong>${p.name}</strong>
-        ${p.composition ? `<div style="font-size:.75rem;color:var(--text-muted)">${p.composition}</div>` : ''}
+        <strong>${safeName}</strong>
+        ${p.composition ? `<div style="font-size:.75rem;color:var(--text-muted)">${safeComp}</div>` : ''}
       </td>
-      <td><span class="badge ${badgeCls}">${p.category}</span></td>
-      <td>${p.form || '--'}</td>
-      <td><span style="font-size:.78rem">${p.packaging || '--'}</span></td>`;
+      <td><span class="badge ${badgeCls}">${safeCat}</span></td>
+      <td>${safeForm}</td>
+      <td><span style="font-size:.78rem">${safePkg}</span></td>`;
 
     if (showActions) {
       html += `<td style="text-align:right;white-space:nowrap">
-        <button class="btn btn-ghost btn-sm" onclick="editProductModal('${p.id}')" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
-        <button class="btn btn-danger btn-sm" onclick="deleteProductById('${p.id}')" title="Delete"><i class="fa-solid fa-trash"></i></button>
+        <button class="btn btn-ghost btn-sm" onclick="editProductModal('${safeId}')" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button class="btn btn-danger btn-sm" onclick="deleteProductById('${safeId}')" title="Delete"><i class="fa-solid fa-trash"></i></button>
       </td>`;
     }
     html += '</tr>';
