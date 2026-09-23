@@ -1,9 +1,4 @@
 {
-  "version": 2,
-  "name": "pharma-site",
-  "builds": [
-    { "src": "**/*", "use": "@vercel/static" }
-  ],
   "cleanUrls": true,
   "headers": [
     {
@@ -15,6 +10,6 @@
   ],
   "rewrites": [
     { "source": "/admin", "destination": "/admin/index.html" },
-    { "source": "/admin/(.*)", "destination": "/admin/$1" }
+    { "source": "/admin/", "destination": "/admin/index.html" }
   ]
 }
